@@ -3,70 +3,88 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LUZAM - TikTok + Insta + WhatsApp</title>
+<title>LUZAM - Par Ushindi Kitungano Michel</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#000;color:#fff;padding-bottom:80px}
+body{background:#000;color:#fff;padding-bottom:85px}
 header{background:#111;padding:12px;text-align:center;position:sticky;top:0;z-index:100}
 header h1{color:#25D366;font-size:24px}
-nav{display:flex;background:#111;position:sticky;top:52px;z-index:100}
-nav button{flex:1;padding:12px;background:none;color:#fff;border:none;font-size:15px}
+nav{display:flex;background:#111;position:sticky;top:58px;z-index:100;overflow-x:auto}
+nav button{flex:1;padding:12px;background:none;color:#fff;border:none;font-size:14px;white-space:nowrap}
 nav button.actif{color:#25D366;border-bottom:3px solid #25D366}
 .page{display:none;padding:10px}
 .page.actif{display:block}
-/* TIKTOK */
-.video{height:75vh;background:#222;border-radius:15px;margin-bottom:15px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.video{height:72vh;background:#222;border-radius:15px;margin-bottom:15px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
 .video img{width:100%;height:100%;object-fit:cover}
-.video-info{position:absolute;bottom:10px;left:10px;right:50px}
+.video-info{position:absolute;bottom:10px;left:10px;right:50px;background:rgba(0,0,0,.6);padding:8px;border-radius:10px}
 .actions{position:absolute;right:10px;bottom:60px;display:flex;flex-direction:column;gap:12px;text-align:center}
 .actions span{background:rgba(0,0,0,.6);padding:10px;border-radius:50%;font-size:20px}
-/* INSTA */
 .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px}
 .grid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:5px}
 .post{background:#111;border-radius:10px;padding:10px;margin-bottom:12px}
 .post img{width:100%;border-radius:10px;margin-top:8px}
-/* WHATSAPP + IA */
 .msg{padding:9px 12px;margin:6px;border-radius:12px;max-width:85%}
 .moi{background:#dcf8c6;color:#000;margin-left:auto}
 .ia{background:#fff;color:#000}
 .barre{position:fixed;bottom:0;left:0;right:0;background:#111;padding:8px;display:flex;gap:5px;z-index:999}
 .barre input{flex:1;padding:12px;border-radius:25px;border:none;outline:none}
 .barre button{width:45px;height:45px;border-radius:50%;border:none;font-size:18px;color:#fff}
+.btn{padding:12px 20px;border:none;border-radius:25px;color:#fff;font-size:15px;margin:5px}
+input.champ{width:100%;padding:12px;margin:6px 0;border-radius:10px;border:none;outline:none}
 </style>
 </head>
 <body>
-<header><h1>🌟 LUZAM 🌟</h1><small>Par Ushindi Kitungano Michel</small></header>
+<header><h1>🌟 LUZAM 🌟</h1><small>Par Ushindi Kitungano Michel - Bukavu 🇨🇩</small><br><span id="nomUser">👤 Invité</span></header>
 <nav>
-<button onclick="onglet('tiktok',this)" class="actif">🎬 TikTok</button>
-<button onclick="onglet('insta',this)">📸 Insta</button>
-<button onclick="onglet('whatsapp',this)">💬 WhatsApp</button>
+<button onclick="onglet('accueil',this)" class="actif">🏠 Accueil</button>
+<button onclick="onglet('videos',this)">🎬 Vidéos</button>
+<button onclick="onglet('photos',this)">📸 Photos</button>
+<button onclick="onglet('chat',this)">💬 Chat</button>
 <button onclick="onglet('ia',this)">🤖 IA LUZAM</button>
 </nav>
 
-<!-- TIKTOK -->
-<div id="tiktok" class="page actif">
-  <div class="video"><img src="https://picsum.photos/500/800?random=1"><div class="video-info"><b>@michel_luzam</b><br>Bienvenue sur LUZAM ! Le réseau du Congo 🇨🇩🔥</div><div class="actions"><span onclick="like(this)">❤️<br><b>1k</b></span><span>💬<br>120</span><span>↗️<br>Partager</span></div></div>
-  <div class="video"><img src="https://picsum.photos/500/800?random=2"><div class="video-info"><b>@dorcas</b><br>Ma vie à Bukavu ❤️</div><div class="actions"><span onclick="like(this)">❤️<br><b>850</b></span><span>💬<br>90</span><span>↗️</span></div></div>
-  <div class="video"><img src="https://picsum.photos/500/800?random=3"><div class="video-info"><b>@feza_maman</b><br>Recette du jour 🍲</div><div class="actions"><span onclick="like(this)">❤️<br><b>2k</b></span><span>💬<br>300</span><span>↗️</span></div></div>
-  <center><button onclick="alert('Publie ta vidéo bientôt !')" style="padding:12px 20px;background:#25D366;color:#fff;border:none;border-radius:25px;font-size:16px;">+ Publier Vidéo 🎬</button></center>
+<!-- ACCUEIL -->
+<div id="accueil" class="page actif">
+  <div style="background:#111;padding:15px;border-radius:15px;text-align:center;">
+    <h2>Bienvenue sur LUZAM ! 🇨🇩</h2><p style="margin:8px 0;">L'application du Congo, pour l'Afrique, pour le monde !</p>
+    <button class="btn" style="background:#25D366;" onclick="creerCompte()">+ Créer mon Compte</button>
+    <button class="btn" style="background:#007bff;" onclick="onglet('videos',document.querySelectorAll('nav button')[1])">Voir les Vidéos</button>
+    <div id="formCompte" style="display:none;margin-top:10px;background:#222;padding:10px;border-radius:10px;">
+      <h3>Créer ton compte LUZAM</h3>
+      <input class="champ" id="nom" placeholder="Ton nom (ex: Michel)">
+      <input class="champ" id="ville" placeholder="Ta ville (ex: Bukavu)">
+      <button class="btn" style="background:#25D366;width:100%;" onclick="validerCompte()">Créer mon compte ✅</button>
+    </div>
+  </div>
+  <div id="mesPosts"></div>
+  <h3 style="margin:15px 0 8px;">🔥 Tendances LUZAM</h3>
+  <div class="post"><b>🌟 Michel Kitungano</b><br>Mon rêve : LUZAM devient la plus grande appli d'Afrique ! Qui est avec moi ? 🔥<br>❤️ 1.5k 💬 200 📤 Partager</div>
+  <div class="post"><b>👤 Dorcas</b><br>Bukavu est belle aujourd'hui ❤️<br><img src="https://picsum.photos/500/300?random=99"><br>❤️ 800 💬 90</div>
 </div>
 
-<!-- INSTA -->
-<div id="insta" class="page">
-  <div class="post"><b>📸 @ushindi.kitungano</b> - Bukavu, Congo<br><img src="https://picsum.photos/500/500?random=10"><br>❤️ 1.2k &nbsp; 💬 45 &nbsp; 📤 <br><b>Michel :</b> Mon rêve c'est changer l'Afrique avec LUZAM ! 🔥</div>
-  <div class="post"><b>📸 @rachel</b><br><img src="https://picsum.photos/500/500?random=11"><br>❤️ 800 &nbsp; 💬 30</div>
-  <h3 style="margin:10px 0;">Explorer</h3>
+<!-- VIDEOS -->
+<div id="videos" class="page">
+  <div id="listeVideos">
+    <div class="video"><img src="https://picsum.photos/500/800?random=1"><div class="video-info"><b>@michel_luzam</b><br>Bienvenue sur LUZAM ! 🇨🇩🔥</div><div class="actions"><span onclick="like(this)">❤️<br>1k</span><span>💬 120</span><span>↗️</span></div></div>
+    <div class="video"><img src="https://picsum.photos/500/800?random=2"><div class="video-info"><b>@dorcas</b><br>Ma vie à Bukavu ❤️</div><div class="actions"><span onclick="like(this)">❤️<br>850</span><span>💬 90</span><span>↗️</span></div></div>
+  </div>
+  <center><button class="btn" style="background:#25D366;" onclick="publierVideo()">+ Publier Vidéo 🎬</button></center>
+</div>
+
+<!-- PHOTOS -->
+<div id="photos" class="page">
+  <div class="post"><b>📸 @ushindi.kitungano</b> - Bukavu<br><img src="https://picsum.photos/500/500?random=10"><br>❤️ 1.2k 💬 45<br><b>Michel :</b> Mon rêve c'est changer l'Afrique avec LUZAM ! 🔥</div>
+  <h3>Explorer</h3>
   <div class="grid"><img src="https://picsum.photos/300/300?random=20"><img src="https://picsum.photos/300/300?random=21"><img src="https://picsum.photos/300/300?random=22"><img src="https://picsum.photos/300/300?random=23"><img src="https://picsum.photos/300/300?random=24"><img src="https://picsum.photos/300/300?random=25"></div>
-  <center><button onclick="alert('Publie ta photo bientôt !')" style="margin-top:15px;padding:12px 20px;background:#E1306C;color:#fff;border:none;border-radius:25px;">+ Publier Photo 📸</button></center>
+  <center><button class="btn" style="background:#E1306C;" onclick="publierPhoto()">+ Publier Photo 📸</button></center>
 </div>
 
-<!-- WHATSAPP -->
-<div id="whatsapp" class="page">
-  <div style="background:#111;padding:10px;border-radius:10px;margin-bottom:10px;" onclick="alert('Chat avec Michel')"><b>👤 Michel Kitungano</b><br><small>En ligne - Salut chef !</small><span style="float:right;">📞 📹</span></div>
-  <div style="background:#111;padding:10px;border-radius:10px;margin-bottom:10px;"><b>👤 Groupe Famille FEZA</b><br><small>Maman: Bonjour mes enfants ❤️</small><span style="float:right;">📞</span></div>
+<!-- CHAT -->
+<div id="chat" class="page">
+  <div style="background:#111;padding:10px;border-radius:10px;margin-bottom:10px;"><b>👤 Michel Kitungano</b><br><small>En ligne - Salut chef !</small><span style="float:right;">📞 📹</span></div>
+  <div style="background:#111;padding:10px;border-radius:10px;margin-bottom:10px;"><b>👤 Groupe Famille FEZA</b><br><small>Maman: Bonjour mes enfants ❤️</small></div>
   <div style="background:#111;padding:10px;border-radius:10px;margin-bottom:10px;"><b>👤 Dorcas</b><br><small>Tu as vu LUZAM ?</small></div>
   <div style="background:#111;padding:10px;border-radius:10px;margin-bottom:10px;"><b>👤 Groupe KAMAGEMA</b><br><small>Les anciens élèves...</small></div>
-  <div style="background:#111;padding:10px;border-radius:10px;margin-bottom:10px;"><b>👤 Groupe LA JOIE</b><br><small>On se revoit quand ?</small></div>
   <div id="waChat"></div>
 </div>
 
@@ -85,13 +103,35 @@ nav button.actif{color:#25D366;border-bottom:3px solid #25D366}
 </div>
 
 <script>
+let monNom = localStorage.getItem('luzam_nom') || "";
+if(monNom) document.getElementById('nomUser').innerText = "👤 " + monNom;
 function onglet(id, btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('actif'));
   document.getElementById(id).classList.add('actif');
   document.querySelectorAll('nav button').forEach(b=>b.classList.remove('actif'));
-  btn.classList.add('actif');
+  if(btn) btn.classList.add('actif');
 }
 function like(el){ el.style.background='red'; alert('Tu as aimé ❤️'); }
+function creerCompte(){ document.getElementById('formCompte').style.display='block'; }
+function validerCompte(){
+  let n=document.getElementById('nom').value.trim();
+  let v=document.getElementById('ville').value.trim() || "Bukavu";
+  if(!n){ alert("Écris ton nom d'abord chef !"); return; }
+  monNom=n; localStorage.setItem('luzam_nom', n);
+  document.getElementById('nomUser').innerText="👤 "+n+" - "+v;
+  document.getElementById('formCompte').style.display='none';
+  alert("Bienvenue "+n+" ! 🎉 Ton compte LUZAM est créé ! Maintenant tu peux publier !");
+}
+function publierVideo(){
+  if(!monNom){ alert("Crée ton compte d'abord ! Clique sur Accueil > Créer mon Compte"); onglet('accueil',document.querySelectorAll('nav button')[0]); return; }
+  let t=prompt("Qu'est-ce que tu veux dire dans ta vidéo ?");
+  if(t){ document.getElementById('listeVideos').innerHTML = "<div class='video'><img src='https://picsum.photos/500/800?random="+Math.floor(Math.random()*100)+"'><div class='video-info'><b>@"+monNom+"</b><br>"+t+"</div><div class='actions'><span>❤️ 0</span><span>💬 0</span></div></div>" + document.getElementById('listeVideos').innerHTML; alert("Ta vidéo est publiée ! 🎬🔥"); }
+}
+function publierPhoto(){
+  if(!monNom){ alert("Crée ton compte d'abord !"); onglet('accueil',document.querySelectorAll('nav button')[0]); return; }
+  let t=prompt("Légende de ta photo ?");
+  if(t){ document.getElementById('mesPosts').innerHTML = "<div class='post'><b>📸 @"+monNom+"</b><br>"+t+"<br>❤️ 0 💬 0 - Juste maintenant</div>" + document.getElementById('mesPosts').innerHTML; alert("Ta photo est publiée ! 📸"); onglet('accueil',document.querySelectorAll('nav button')[0]); }
+}
 function parler(){
   try{
     const Rec = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -100,37 +140,20 @@ function parler(){
     rec.start(); alert('Parle maintenant chef, je t’écoute... 🎤');
   }catch(e){ alert('Ton téléphone ne supporte pas la voix, écris alors !'); }
 }
-function ecouterTexte(t){
-  speechSynthesis.cancel();
-  let v = new SpeechSynthesisUtterance(t); v.lang='fr-FR'; v.rate=1;
-  speechSynthesis.speak(v);
-}
+function ecouterTexte(t){ speechSynthesis.cancel(); let v=new SpeechSynthesisUtterance(t); v.lang='fr-FR'; speechSynthesis.speak(v); }
 function arreterVoix(){ speechSynthesis.cancel(); alert('Ok chef, je m’arrête ! ⏹️'); }
-function appeler(){ alert('📞 Appel LUZAM en cours... Bientôt appel vocal + vidéo comme WhatsApp !'); }
+function appeler(){ alert('📞 Appel LUZAM en cours... Bientôt appel vocal + vidéo !'); }
 async function envoyer(){
-  let txt=document.getElementById('chatInput').value.trim();
-  if(!txt) return;
-  let box=document.getElementById('chatBox');
-  let wa=document.getElementById('waChat');
+  let txt=document.getElementById('chatInput').value.trim(); if(!txt) return;
   let pageActuelle=document.querySelector('.page.actif').id;
-  let cible = pageActuelle==='whatsapp' ? wa : box;
-  if(!cible) cible=box;
+  let cible = pageActuelle==='chat' ? document.getElementById('waChat') : document.getElementById('chatBox');
   cible.innerHTML+="<div class='msg moi'>"+txt+"</div>";
   document.getElementById('chatInput').value="";
-  // Si on est sur IA, on appelle la vraie IA
-  if(pageActuelle==='ia' || pageActuelle==='whatsapp'){
-    try{
-      let r=await fetch('/api/ai',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:txt})});
-      let d=await r.json();
-      cible.innerHTML+="<div class='msg ia'>"+d.reply+"<br><button onclick=\"ecouterTexte('"+d.reply.replace(/'/g,'').replace(/\"/g,'').substring(0,500)+"')\" style='margin-top:5px;padding:5px 10px;border-radius:15px;border:none;background:#007bff;color:#fff;'>🔊 Écouter</button> <button onclick='arreterVoix()' style='padding:5px 10px;border-radius:15px;border:none;background:red;color:#fff;'>⏹️ Stop</button></div>";
-      // Décommente pour que l'IA parle toute seule :
-      // ecouterTexte(d.reply);
-    }catch(e){
-      cible.innerHTML+="<div class='msg ia'>Salut chef ! Je suis là, dis-moi tout !</div>";
-    }
-  } else {
-    cible.innerHTML+="<div class='msg ia'>Message envoyé !</div>";
-  }
+  try{
+    let r=await fetch('/api/ai',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:txt})});
+    let d=await r.json();
+    cible.innerHTML+="<div class='msg ia'>"+d.reply+"<br><button onclick=\"ecouterTexte('"+d.reply.replace(/'/g,'').replace(/\"/g,'').substring(0,500)+"')\" style='margin-top:5px;padding:5px 10px;border-radius:15px;border:none;background:#007bff;color:#fff;'>🔊 Écouter</button> <button onclick='arreterVoix()' style='padding:5px 10px;border-radius:15px;border:none;background:red;color:#fff;'>⏹️ Stop</button></div>";
+  }catch(e){ cible.innerHTML+="<div class='msg ia'>Salut chef ! Je suis là, dis-moi tout !</div>"; }
   window.scrollTo(0,document.body.scrollHeight);
 }
 </script>
