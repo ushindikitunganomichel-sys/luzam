@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUZAM</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0B0B10">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#0B0B10;color:white;padding-bottom:90px}
+.center{max-width:420px;margin:0 auto;padding:25px 20px;text-align:center}
+.logo{background:#D4FF00;color:#000;font-weight:900;font-size:34px;padding:16px 34px;border-radius:14px;display:inline-block;letter-spacing:2px}
+input{width:100%;background:#1A1A22;border:none;padding:15px 15px 15px 45px;border-radius:14px;color:white;font-size:15px;margin-bottom:12px;outline:none}
+.input-box{position:relative}.input-box span{position:absolute;left:15px;top:14px;font-size:16px}
+.btn-green{background:#D4FF00;color:#000;width:100%;padding:16px;border:none;border-radius:14px;font-weight:900;font-size:16px}
+.btn-dark{background:#1E1E28;color:white;width:100%;padding:16px;border:none;border-radius:14px;font-weight:800;margin-top:12px}
+.page{display:none}.page.active{display:block}
+.header{display:flex;justify-content:space-between;align-items:center;padding:14px 15px;background:#0B0B10;position:sticky;top:0;z-index:100}
+.dots{font-size:28px;cursor:pointer;padding:0 8px;position:relative}
+.dots-menu{display:none;position:absolute;right:0;top:35px;background:#1E1E28;border-radius:12px;width:210px;z-index:999;box-shadow:0 10px 30px rgba(0,0,0,.8);text-align:left}
+.dots-menu div{padding:14px;border-bottom:1px solid #333;font-size:14px}
+.friend{display:flex;align-items:center;gap:12px;background:#16161E;padding:14px;border-radius:14px;margin:10px 15px;cursor:pointer;text-align:left}
+.avatar{width:50px;height:50px;border-radius:50%;background:#D4FF00;color:#000;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:22px;flex-shrink:0}
+.story{display:flex;gap:14px;padding:8px 15px;overflow-x:auto}
+.story div{text-align:center;flex-shrink:0}
+.cercle{width:62px;height:62px;border-radius:50%;border:3px solid #D4FF00;display:flex;align-items:center;justify-content:center;font-size:26px;background:#1A1A22}
+.cercle.pink{border-color:#FF4D8D}.cercle.blue{border-color:#4D8DFF}.cercle.orange{border-color:#FF8D00}.cercle.green{border-color:#00D455}
+.post{background:#16161E;border-radius:14px;padding:14px;margin:12px 15px;text-align:left}
+.chip{background:#1E1E28;padding:8px 14px;border-radius:20px;font-size:13px;display:inline-block;margin:3px 2px}
+.chip.active{background:#D4FF00;color:#000;font-weight:800}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 15px;margin-top:15px}
+.grid div{background:#1A1A22;height:140px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:42px}
+.msg{max-width:80%;padding:11px 14px;border-radius:15px;margin:8px 0;font-size:14px;line-height:1.4}
+.msg.me{background:#D4FF00;color:#000;margin-left:auto}.msg.other{background:#1E1E28}
+.send-bar{position:fixed;bottom:75px;left:0;right:0;background:#111;padding:10px;display:flex;gap:8px;z-index:50}
+.send-bar input{margin:0}.send-bar button{background:#D4FF00;border:none;padding:13px 18px;border-radius:12px;font-weight:900}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:500;align-items:center;justify-content:center}
+.modal-box{background:#1A1A22;width:90%;max-width:380px;border-radius:16px;padding:20px}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#111;border-top:1px solid #222;display:flex;justify-content:space-around;padding:10px 0 12px;z-index:100}
+.bottom-nav div{text-align:center;font-size:11px;color:#888;cursor:pointer;flex:1}
+.bottom-nav div.active{color:#D4FF00;font-weight:bold}
+.ai-btn{position:fixed;right:15px;bottom:95px;width:55px;height:55px;background:#D4FF00;color:#000;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;z-index:400;border:3px solid #000;box-shadow:0 5px 20px rgba(212,255,0,.5);cursor:pointer}
+.ai-box{display:none;position:fixed;right:15px;bottom:160px;width:280px;background:#1E1E28;border-radius:16px;padding:15px;z-index:401;border:1px solid #D4FF00}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login" class="page active"><div class="center">
+<div class="logo">LUZAM</div>
+<h1 style="margin-top:20px;font-size:22px">Bienvenue sur LUZAM 🌍</h1>
+<p style="color:#888;font-size:13px;margin:6px 0 20px">Créé par USHINDI KITUNGANO MICHEL</p>
+<div class="input-box"><span>👤</span><input id="myName" placeholder="Ton nom complet"></div>
+<div class="input-box"><span>📧</span><input placeholder="Email ou Téléphone"></div>
+<div class="input-box"><span>🔒</span><input type="password" placeholder="Mot de passe"></div>
+<div class="input-box"><span>🌍</span><input placeholder="Pays : Congo CD / France FR / USA US"></div>
+<button class="btn-green" onclick="entrer()">CRÉER MON COMPTE →</button>
+<button class="btn-dark" onclick="entrer()">SE CONNECTER</button>
+<p style="color:#666;font-size:11px;margin-top:18px;line-height:1.5">En continuant, tu acceptes les conditions d'utilisation.<br>🔒 Tes données restent privées.<br>🌍 LUZAM © 2026 — Créé par USHINDI KITUNGANO MICHEL CD</p>
+</div></div>
+
+<!-- ACCUEIL -->
+<div id="home" class="page">
+<div class="header"><div style="background:#D4FF00;color:#000;padding:8px 14px;border-radius:10px;font-weight:900">LUZAM</div><div style="display:flex;align-items:center;gap:5px"><span style="font-size:20px">🔔</span><div class="dots" onclick="toggleMenu('menu1')">⋮<div id="menu1" class="dots-menu"><div onclick="openModal('profil')">👤 Mon Profil</div><div onclick="openModal('param')">⚙️ Paramètres</div><div onclick="openModal('langue')">🌍 Langue / Pays</div><div onclick="openModal('aide')">❓ Aide</div><div onclick="deconnecter()" style="color:#ff5555">🚪 Se déconnecter</div></div></div></div></div>
+<div class="story">
+<div><div class="cercle">U</div><small>Toi</small></div>
+<div><div class="cercle">🎬</div><small>Grace CD</small></div>
+<div><div class="cercle pink">🌸</div><small>Sophie FR</small></div>
+<div><div class="cercle blue">🌉</div><small>John US</small></div>
+<div><div class="cercle orange">🛍️</div><small>Amara NG</small></div>
+</div>
+<div style="padding:8px 15px"><span class="chip active">Pour toi</span><span class="chip">Amis</span><span class="chip">Afrique</span><span class="chip">Monde</span></div>
+<div class="post"><b>Grace 🇨🇩</b> <span style="color:#888;font-size:12px">• Il y a 2 min • Congo</span><p style="margin-top:8px">LUZAM est le futur du Congo ! Qui est d'accord ? 🇨🇩🔥</p><p style="color:#888;font-size:13px;margin-top:8px">❤️ 245 &nbsp; 💬 89</p></div>
+<div class="post"><b>Sophie 🇫🇷</b> <span style="color:#888;font-size:12px">• Il y a 5 min • Paris</span><p style="margin-top:8px">Bonjour depuis Paris ! J'adore LUZAM 🌍</p><p style="color:#888;font-size:13px;margin-top:8px">❤️ 156 &nbsp; 💬 34</p></div>
+<div class="post"><b>John 🇺🇸</b> <span style="color:#888;font-size:12px">• Il y a 12 min • New York</span><p style="margin-top:8px">LUZAM from USA ! This app is amazing 🌍🔥</p><p style="color:#888;font-size:13px;margin-top:8px">❤️ 312 &nbsp; 💬 67</p></div>
+</div>
+
+<!-- MONDE -->
+<div id="monde" class="page">
+<div class="header"><div><b style="font-size:20px">Découvrir le Monde 🌍</b><br><small style="color:#888;font-size:12px">Créé par USHINDI KITUNGANO MICHEL</small></div><div class="dots" onclick="toggleMenu('menu2')">⋮<div id="menu2" class="dots-menu"><div onclick="openModal('param')">⚙️ Paramètres</div><div onclick="openModal('langue')">🌍 Langue</div><div onclick="openModal('aide')">❓ Aide</div></div></div></div>
+<div style="padding:10px 15px"><input placeholder="🔍 Rechercher dans le monde..." style="padding:15px"></div>
+<div style="padding:0 15px"><span class="chip">CD Congo</span><span class="chip">FR France</span><span class="chip">US USA</span><span class="chip">NG Nigeria</span><span class="chip">BR Brésil</span><span class="chip">🌍 Tout</span></div>
+<div class="grid"><div>🎥</div><div>🖼️</div><div>🎤</div><div>⚽</div><div>💃</div><div>🛍️</div></div>
+</div>
+
+<!-- POSTER -->
+<div id="poster" class="page">
+<div class="header"><b style="font-size:20px">Poster</b><div class="dots" onclick="toggleMenu('menuP')">⋮<div id="menuP" class="dots-menu"><div onclick="openModal('param')">⚙️ Paramètres</div><div onclick="openModal('aide')">❓ Aide</div></div></div></div>
+<div style="text-align:center;padding:25px 20px">
+<h2 style="font-size:22px">Créer pour le Monde 🌍</h2>
+<button class="btn-green" style="margin-top:20px" onclick="show('home')">🎬 Poster une Vidéo (TikTok)</button>
+<button class="btn-dark" onclick="show('home')">🖼️ Poster une Photo (Insta)</button>
+<button style="background:#7C3AED;color:white;width:100%;padding:16px;border:none;border-radius:14px;font-weight:800;margin-top:12px" onclick="show('home')">🛍️ Poster un Produit (Commerçant)</button>
+<div style="background:#1A1A22;border-radius:12px;padding:14px;margin-top:18px;text-align:left"><b>✨ Luzam AI</b><p style="color:#888;font-size:13px;margin-top:6px">Luzam AI peut t'aider à écrire en Français, English, Swahili...<br>Écrire un post pour mon produit...</p></div>
+<p style="font-size:26px;margin-top:14px">😜 😂 ❤️ 🔥 🎉 🥳 💃 🌍</p>
+</div>
+</div>
+
+<!-- CHAT LISTE -->
+<div id="chatList" class="page">
+<div class="header"><b style="font-size:20px">💬 Chat</b><div class="dots" onclick="toggleMenu('menu3')">⋮<div id="menu3" class="dots-menu"><div onclick="openModal('param')">⚙️ Paramètres</div><div onclick="openModal('aide')">❓ Aide</div></div></div></div>
+<div style="padding:15px"><h2>Mes Discussions</h2><p style="color:#888;font-size:13px">En ligne - Serveur LUZAM</p></div>
+<div id="listeAmis"></div>
+</div>
+
+<!-- CHAT CONVERSATION -->
+<div id="chat" class="page">
+<div class="header"><span onclick="show('chatList')" style="cursor:pointer;font-size:22px">←</span><div class="avatar" id="chatAvatar" style="width:40px;height:40px;font-size:16px">M</div><div style="flex:1;text-align:left"><b id="chatNom">Michel</b><br><span style="color:#2ecc71;font-size:12px">● En ligne</span></div><div class="dots" onclick="toggleMenu('menuChat')">⋮<div id="menuChat" class="dots-menu"><div>Voir Profil</div><div>🔇 Mettre en sourdine</div><div style="color:#ff5555">Bloquer</div></div></div></div>
+<div id="chatBox" style="padding:15px;padding-bottom:90px"></div>
+<div class="send-bar"><input id="msgInput" placeholder="Écris à ton ami..."><button onclick="envoyer()">Envoyer →</button></div>
+</div>
+
+<!-- MOI -->
+<div id="moi" class="page">
+<div class="header"><b>Mon Profil</b><div class="dots" onclick="toggleMenu('menuMoi')">⋮<div id="menuMoi" class="dots-menu"><div onclick="openModal('profil')">👤 Mon Profil</div><div onclick="openModal('param')">⚙️ Paramètres</div><div onclick="deconnecter()" style="color:#ff5555">🚪 Se déconnecter</div></div></div></div>
+<div style="text-align:center;padding:25px 15px">
+<div class="avatar" style="width:90px;height:90px;font-size:40px;margin:0 auto">U</div>
+<h2 style="margin-top:12px">USHINDI KITUNGANO MICHEL</h2>
+<p style="color:#D4FF00;font-weight:bold">@ushindi • Fondateur de LUZAM 👑</p>
+<p style="color:#888;font-size:13px;margin-top:5px">Congo CD • 🟢 En ligne</p>
+<p style="color:#888;font-size:13px;margin-top:8px;line-height:1.5">Créateur de LUZAM - Réseau Social Mondial 🌍<br>Pour le monde entier, par un jeune du Congo.</p>
+<div style="display:flex;justify-content:space-around;margin:20px 0"><div><b>128</b><br><span style="color:#888;font-size:13px">Posts</span></div><div><b>12.5K</b><br><span style="color:#888;font-size:13px">Abonnés 🌍</span></div><div><b>340</b><br><span style="color:#888;font-size:13px">Suivis</span></div></div>
+<div style="background:#1E1E28;padding:14px;border-radius:12px;text-align:left">🛍️ <b>Ma Boutique : 5 produits en vente</b></div>
+<button class="btn-green" style="margin-top:15px">Modifier Profil</button>
+<p style="color:#666;font-size:12px;margin-top:15px;line-height:1.6">LUZAM © 2026<br>Créé par USHINDI KITUNGANO MICHEL CD<br>Congo • Pour le Monde Entier 🌍</p>
+</div>
+</div>
+
+<!-- AI + BARRE EN BAS -->
+<div class="ai-btn" onclick="toggleAI()">✨</div>
+<div id="aiBox" class="ai-box"><b>✨ LUZAM AI</b><p style="color:#aaa;font-size:13px;margin:8px 0">Salut ! Je suis ton assistant LUZAM. Comment je peux t'aider ?</p><input placeholder="Demande à LUZAM AI..." style="padding:10px;margin:0"><button class="btn-green" style="padding:10px;margin-top:8px" onclick="alert('LUZAM AI : Je vais t aider chef !')">Demander à AI</button></div>
+
+<div class="bottom-nav">
+<div onclick="show('home')">🏠<br>Accueil</div>
+<div onclick="show('monde')">🌍<br>Monde</div>
+<div onclick="show('poster')"><div style="font-size:22px;color:#D4FF00;line-height:1">＋</div>Poster</div>
+<div onclick="show('chatList')">💬<br>Chat</div>
+<div onclick="show('moi')">👤<br>Moi</div>
+</div>
+
+<div id="modal" class="modal"><div class="modal-box"><h3 id="modalTitle">Paramètres</h3><p id="modalText" style="color:#aaa;margin:12px 0;line-height:1.6"></p><button class="btn-green" onclick="closeModal()">Fermer</button></div></div>
+
+<script>
+let amis=[{nom:"Michel - Congo",lettre:"M",msg:"Salut chef ! Tu es sur LUZAM ?"},{nom:"Sarah - France",lettre:"S",msg:"En France aussi on utilise LUZAM !"}, {nom:"John - USA",lettre:"J",msg:"Hello from USA !"}];
+function show(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.dots-menu').forEach(m=>m.style.display='none');window.scrollTo(0,0)}
+function entrer(){afficherAmis();show('home')}
+function afficherAmis(){document.getElementById('listeAmis').innerHTML=amis.map((a,i)=>`<div class="friend" onclick="ouvrirChat(${i})"><div class="avatar">${a.lettre}</div><div><b>${a.nom}</b><br><span style="color:#888;font-size:13px">${a.msg}</span></div><div style="margin-left:auto;color:#2ecc71">●</div></div>`).join('')}
+function ouvrirChat(i){let a=amis[i];document.getElementById('chatNom').innerText=a.nom;document.getElementById('chatAvatar').innerText=a.lettre;document.getElementById('chatBox').innerHTML=`<div class="msg other">${a.msg}</div><div class="msg me">Oui chef ! On est en ligne sur LUZAM ! 🌍</div>`;show('chat')}
+function envoyer(){let v=document.getElementById('msgInput').value;if(!v) return;document.getElementById('chatBox').innerHTML+=`<div class="msg me">${v}</div>`;document.getElementById('msgInput').value='';setTimeout(()=>{document.getElementById('chatBox').innerHTML+=`<div class="msg other">Reçu ! Je te réponds depuis loin, grâce au serveur LUZAM ! ✅</div>`},800)}
+function toggleMenu(id){let m=document.getElementById(id);let o=m.style.display==='block';document.querySelectorAll('.dots-menu').forEach(x=>x.style.display='none');m.style.display=o?'none':'block'}
+function toggleAI(){let b=document.getElementById('aiBox');b.style.display=b.style.display==='block'?'none':'block'}
+function openModal(type){document.querySelectorAll('.dots-menu').forEach(m=>m.style.display='none');let t=document.getElementById('modalTitle'),txt=document.getElementById('modalText');if(type==='profil'){t.innerText='👤 Mon Profil';txt.innerHTML='Nom : USHINDI KITUNGANO MICHEL<br>@ushindi • Fondateur de LUZAM<br>Pays : Congo CD';}if(type==='param'){t.innerText='⚙️ Paramètres';txt.innerHTML='🔔 Notifications : Activées<br>🌙 Mode sombre : Oui<br>🔒 Confidentialité : Amis seulement<br>📱 Serveur : Connecté';}if(type==='langue'){t.innerText='🌍 Langue / Pays';txt.innerHTML='Français 🇫🇷<br>English 🇺🇸<br>Lingala 🇨🇩<br>Swahili 🇨🇩';}if(type==='aide'){t.innerText='❓ Aide';txt.innerHTML='LUZAM créé par USHINDI KITUNGANO MICHEL. Pour parler avec un ami loin, clique sur Chat.';}document.getElementById('modal').style.display='flex'}
+function closeModal(){document.getElementById('modal').style.display='none'}
+function deconnecter(){show('login')}
+afficherAmis();
+</script>
+</body>
+</html>
