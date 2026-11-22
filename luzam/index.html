@@ -10,168 +10,74 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 body{background:#0a0a0a;color:white;padding-bottom:90px}
 header{background:#D4FF00;color:black;padding:15px;text-align:center;position:sticky;top:0;z-index:100}
-header h1{font-size:26px;letter-spacing:2px}
-header p{font-size:12px}
+header h1{font-size:26px}
 .container{max-width:500px;margin:auto;padding:10px}
 .post-box{background:#1a1a1a;border-radius:15px;padding:12px;margin-bottom:12px}
-.post-box textarea{width:100%;height:70px;border:none;border-radius:10px;padding:10px;background:#2a2a2a;color:white;resize:none}
-.post-box button{background:#D4FF00;border:none;padding:10px 20px;border-radius:20px;font-weight:bold;cursor:pointer;margin-top:8px;width:100%}
+.post-box textarea{width:100%;height:70px;border:none;border-radius:10px;padding:10px;background:#2a2a2a;color:white}
+.post-box button{background:#D4FF00;border:none;padding:10px;border-radius:20px;font-weight:bold;width:100%;margin-top:8px;cursor:pointer}
 .post{background:#1a1a1a;border-radius:15px;padding:12px;margin-bottom:12px}
 .post b{color:#D4FF00}
-.post p{margin:8px 0;line-height:1.5}
-.post small{color:#888}
-.nav{position:fixed;bottom:0;left:0;right:0;background:#111;display:flex;justify-content:space-around;padding:12px;border-top:2px solid #D4FF00;z-index:100}
-.nav button{background:none;border:none;color:white;font-size:22px;cursor:pointer}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#111;display:flex;justify-content:space-around;padding:12px;border-top:2px solid #D4FF00}
+.nav button{background:none;border:none;color:white;font-size:22px}
 .nav button.active{color:#D4FF00}
-.ai-btn{position:fixed;bottom:80px;right:15px;background:#D4FF00;color:black;width:55px;height:55px;border-radius:50%;font-size:26px;border:none;cursor:pointer;z-index:200;box-shadow:0 0 15px #D4FF00}
-#aiBox{display:none;position:fixed;bottom:145px;right:10px;width:320px;max-width:92vw;background:white;color:black;border-radius:15px;padding:12px;z-index:300;box-shadow:0 0 25px black}
-#aiMessages{height:220px;overflow:auto;text-align:left;font-size:14px;line-height:1.5;margin-bottom:8px}
+.ai-btn{position:fixed;bottom:80px;right:15px;background:#D4FF00;color:black;width:55px;height:55px;border-radius:50%;font-size:26px;border:none;z-index:200}
+#aiBox{display:none;position:fixed;bottom:145px;right:10px;width:330px;max-width:94vw;background:white;color:black;border-radius:15px;padding:12px;z-index:300;box-shadow:0 0 25px black}
+#aiMessages{height:230px;overflow:auto;font-size:14px;line-height:1.5}
 #aiMessages div{margin-bottom:8px}
-#aiInput{width:72%;padding:9px;border-radius:10px;border:1px solid #ccc}
-#aiBox button{background:#D4FF00;border:none;padding:9px 12px;border-radius:10px;font-weight:bold;cursor:pointer}
+#aiInput{width:58%;padding:9px;border-radius:10px;border:1px solid #ccc}
+.micBtn{background:#ff3b30!important;color:white!important;width:38px!important;padding:9px!important;border-radius:50%!important}
 .hidden{display:none}
 input{padding:10px;width:100%;border-radius:10px;border:none;margin-bottom:8px;background:#2a2a2a;color:white}
 </style>
 </head>
 <body>
-
-<header>
-<h1>LUZAM 🌍</h1>
-<p>Le Réseau Social Mondial - Par USHINDI KITUNGANO MICHEL 🇨🇩</p>
-</header>
-
+<header><h1>LUZAM 🌍</h1><p>Par USHINDI KITUNGANO MICHEL 🇨🇩 - 18 ans - Bukavu</p></header>
 <div class="container">
 <div id="page-home">
-<div class="post-box">
-<h3 style="margin-bottom:8px">Quoi de neuf, chef ? ✨</h3>
-<textarea id="postText" placeholder="Écris quelque chose pour le monde..."></textarea>
-<button onclick="publishPost()">Publier sur LUZAM 🚀</button>
-</div>
+<div class="post-box"><h3>Quoi de neuf, chef ? ✨</h3><textarea id="postText" placeholder="Écris quelque chose..."></textarea><button onclick="publishPost()">Publier 🚀</button></div>
 <div id="feed"></div>
 </div>
-
-<div id="page-chat" class="hidden">
-<div class="post-box">
-<h3>💬 Messages</h3>
-<input id="chatName" placeholder="Ton nom">
-<input id="chatMsg" placeholder="Ton message...">
-<button onclick="sendMsg()">Envoyer le message</button>
+<div id="page-chat" class="hidden"><div class="post-box"><h3>💬 Messages</h3><input id="chatName" placeholder="Ton nom"><input id="chatMsg" placeholder="Ton message..."><button onclick="sendMsg()">Envoyer</button></div><div id="chatList"></div></div>
+<div id="page-profil" class="hidden"><div class="post-box" style="text-align:center"><h2>👤 USHINDI KITUNGANO MICHEL</h2><p>18 ans - Visionnaire - Développeur Web</p><p>Bukavu, Sud-Kivu, Congo 🇨🇩</p><p style="color:#D4FF00;margin-top:10px">Fondateur de LUZAM - Pour aider les élèves à faire leurs devoirs !</p></div></div>
 </div>
-<div id="chatList"></div>
-</div>
-
-<div id="page-profil" class="hidden">
-<div class="post-box" style="text-align:center">
-<h2>👤 USHINDI KITUNGANO MICHEL</h2>
-<p style="margin:8px 0">Fondateur de LUZAM 🇨🇩</p>
-<p>Bukavu, Sud-Kivu, Congo</p>
-<p style="margin-top:10px;color:#D4FF00">LUZAM - Le futur est à nous !</p>
-</div>
-</div>
-</div>
-
 <button class="ai-btn" onclick="toggleAI()">🤖</button>
-
 <div id="aiBox">
 <b>🤖 LUZAM IA</b> <span onclick="toggleAI()" style="float:right;cursor:pointer">❌</span>
-<div id="aiMessages"><div><b>LUZAM IA:</b> Salut chef ! 👋 Moi c'est l'IA de LUZAM. Pose-moi une question, je te réponds vraiment !</div></div>
-<input id="aiInput" placeholder="Écris ici...">
+<p style="font-size:12px;color:#666">Créée par USHINDI KITUNGANO MICHEL - Pose ta question ou parle !</p>
+<div id="aiMessages"><div><b>LUZAM IA:</b> Salut chef ! 👋 Moi c'est l'IA de LUZAM. Mon patron c'est USHINDI KITUNGANO MICHEL, 18 ans, de Bukavu ! Tu es élève ? Dis-moi ton devoir, je t'aide ! Tu peux aussi cliquer sur le micro 🎤 pour parler !</div></div>
+<input id="aiInput" placeholder="Écris ou parle...">
+<button onclick="startVoice()" class="micBtn">🎤</button>
 <button onclick="sendAI()">Envoyer</button>
+<button onclick="speakLast()" style="background:#111;color:white;padding:9px;border-radius:10px;border:none">🔊 Écouter</button>
 </div>
-
-<div class="nav">
-<button onclick="showPage('home',this)" class="active">🏠</button>
-<button onclick="showPage('chat',this)">💬</button>
-<button onclick="showPage('profil',this)">👤</button>
-</div>
-
+<div class="nav"><button onclick="showPage('home',this)" class="active">🏠</button><button onclick="showPage('chat',this)">💬</button><button onclick="showPage('profil',this)">👤</button></div>
 <script>
-let posts = JSON.parse(localStorage.getItem('luzam_posts')||'[]');
-if(posts.length==0){
-posts=[{name:"USHINDI KITUNGANO MICHEL",text:"Bienvenue sur LUZAM ! 🌍 Le nouveau réseau social mondial, créé au Congo, à Bukavu ! Partage, discute, et rencontre le monde entier ! 🇨🇩🔥",time:"Maintenant"}];
-}
-
-function showPage(p,btn){
-document.getElementById('page-home').classList.add('hidden');
-document.getElementById('page-chat').classList.add('hidden');
-document.getElementById('page-profil').classList.add('hidden');
-document.getElementById('page-'+p).classList.remove('hidden');
-document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
-if(btn) btn.classList.add('active');
-if(p=='chat') loadChat();
-}
-
-function renderPosts(){
-let feed=document.getElementById('feed');
-feed.innerHTML="";
-posts.slice().reverse().forEach(p=>{
-feed.innerHTML += `<div class="post"><b>${p.name}</b><br><small>${p.time}</small><p>${p.text}</p></div>`;
-});
-}
-function publishPost(){
-let t=document.getElementById('postText').value;
-if(!t) return alert("Écris quelque chose d'abord !");
-posts.push({name:"Toi",text:t,time:new Date().toLocaleString()});
-localStorage.setItem('luzam_posts',JSON.stringify(posts));
-document.getElementById('postText').value="";
-renderPosts();
-alert("Publié sur LUZAM ! 🎉");
-}
-
-async function sendMsg(){
-let n=document.getElementById('chatName').value||"Anonyme";
-let m=document.getElementById('chatMsg').value;
-if(!m) return;
-try{ await fetch('/api/message',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,text:m})}); }catch(e){}
-document.getElementById('chatMsg').value="";
-loadChat();
-}
-async function loadChat(){
-try{
-let r=await fetch('/api/messages');
-let data=await r.json();
-let list=document.getElementById('chatList');
-list.innerHTML="";
-data.slice().reverse().forEach(m=>{
-list.innerHTML += `<div class="post"><b>${m.name||'Anonyme'}</b><p>${m.text||''}</p></div>`;
-});
-}catch(e){}
-}
-
-function toggleAI(){
-let b=document.getElementById('aiBox');
-b.style.display = (b.style.display=='none' || b.style.display=='') ? 'block' : 'none';
-}
-
+let posts=JSON.parse(localStorage.getItem('luzam_posts')||'[]');
+if(posts.length==0) posts=[{name:"USHINDI KITUNGANO MICHEL",text:"Bienvenue sur LUZAM ! 🌍 Créé par USHINDI, 18 ans, de Bukavu ! Pour les élèves, pour apprendre et partager !",time:"Maintenant"}];
+let lastAI="";
+function showPage(p,btn){document.getElementById('page-home').classList.add('hidden');document.getElementById('page-chat').classList.add('hidden');document.getElementById('page-profil').classList.add('hidden');document.getElementById('page-'+p).classList.remove('hidden');document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');if(p=='chat')loadChat();}
+function renderPosts(){let f=document.getElementById('feed');f.innerHTML="";posts.slice().reverse().forEach(p=>{f.innerHTML+=`<div class="post"><b>${p.name}</b><br><small>${p.time}</small><p>${p.text}</p></div>`});}
+function publishPost(){let t=document.getElementById('postText').value;if(!t)return;posts.push({name:"Toi",text:t,time:new Date().toLocaleString()});localStorage.setItem('luzam_posts',JSON.stringify(posts));document.getElementById('postText').value="";renderPosts();}
+async function sendMsg(){let n=document.getElementById('chatName').value||"Anonyme";let m=document.getElementById('chatMsg').value;if(!m)return;try{await fetch('/api/message',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,text:m})})}catch(e){}document.getElementById('chatMsg').value="";loadChat();}
+async function loadChat(){try{let r=await fetch('/api/messages');let d=await r.json();let l=document.getElementById('chatList');l.innerHTML="";d.slice().reverse().forEach(m=>{l.innerHTML+=`<div class="post"><b>${m.name||'Anonyme'}</b><p>${m.text||''}</p></div>`})}catch(e){}}
+function toggleAI(){let b=document.getElementById('aiBox');b.style.display=(b.style.display=='none'||b.style.display=='')?'block':'none';}
 async function sendAI(){
-let input=document.getElementById('aiInput');
-let q=input.value.trim();
-if(!q) return;
-let box=document.getElementById('aiMessages');
-box.innerHTML += `<div><b>Toi:</b> ${q}</div>`;
-input.value="";
-box.innerHTML += `<div id="thinking"><i>LUZAM IA réfléchit...</i></div>`;
-box.scrollTop=box.scrollHeight;
-try{
-let r=await fetch('/api/ai',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:q})});
-let d=await r.json();
-document.getElementById('thinking').remove();
-box.innerHTML += `<div><b>LUZAM IA:</b> ${d.reply}</div>`;
-}catch(e){
-let t=document.getElementById('thinking'); if(t) t.remove();
-let low=q.toLowerCase();
-let rep="Super question chef ! '"+q+"' - Je suis l'IA de LUZAM, je peux t'aider à écrire un post, traduire, ou apprendre ! Dis-moi plus de détails !";
-if(low.includes("bonjour")||low.includes("salut")) rep="Bonjour chef ! 👋 Moi c'est l'IA de LUZAM, créée par USHINDI KITUNGANO MICHEL. Comment je peux t'aider ?";
-if(low.includes("congo")||low.includes("bukavu")) rep="Le Congo 🇨🇩 c'est un grand pays au cœur de l'Afrique ! Bukavu c'est dans le Sud-Kivu, c'est là que LUZAM est né !";
-if(low.includes("luzam")) rep="LUZAM c'est le futur réseau social mondial ! Tu peux poster, discuter, et utiliser ton IA ! C'est créé par USHINDI KITUNGANO MICHEL !";
-if(low.includes("merci")) rep="De rien chef ! C'est un plaisir !";
-box.innerHTML += `<div><b>LUZAM IA:</b> ${rep}</div>`;
-}
+let input=document.getElementById('aiInput');let q=input.value.trim();if(!q)return;
+let box=document.getElementById('aiMessages');box.innerHTML+=`<div><b>Toi:</b> ${q}</div>`;input.value="";box.innerHTML+=`<div id="thinking"><i>LUZAM IA réfléchit...</i></div>`;box.scrollTop=box.scrollHeight;
+try{let r=await fetch('/api/ai',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:q})});let d=await r.json();document.getElementById('thinking').remove();box.innerHTML+=`<div><b>LUZAM IA:</b> ${d.reply}</div>`;lastAI=d.reply;speakText(d.reply);}catch(e){let t=document.getElementById('thinking');if(t)t.remove();let rep="Je suis là chef ! Dis-moi ton devoir, je t'aide !";box.innerHTML+=`<div><b>LUZAM IA:</b> ${rep}</div>`;lastAI=rep;}
 box.scrollTop=box.scrollHeight;
 }
-document.getElementById('aiInput').addEventListener('keypress',function(e){ if(e.key=='Enter') sendAI(); });
-renderPosts();
-loadChat();
+function speakText(txt){try{let u=new SpeechSynthesisUtterance(txt);u.lang='fr-FR';speechSynthesis.speak(u);}catch(e){}}
+function speakLast(){if(lastAI) speakText(lastAI);}
+function startVoice(){
+let Rec=window.SpeechRecognition||window.webkitSpeechRecognition;
+if(!Rec) return alert("Ton navigateur ne supporte pas le micro, écris ton message !");
+let rec=new Rec();rec.lang='fr-FR';rec.start();
+rec.onresult=function(e){document.getElementById('aiInput').value=e.results[0][0].transcript;sendAI();};
+rec.onerror=function(){alert("Je n'ai pas entendu, réessaie chef !");}
+}
+document.getElementById('aiInput').addEventListener('keypress',function(e){if(e.key=='Enter')sendAI();});
+renderPosts();loadChat();
 </script>
 </body>
 </html>
