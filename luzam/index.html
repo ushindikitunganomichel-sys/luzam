@@ -3,159 +3,136 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LUZAM - Par Ushindi Kitungano Michel</title>
+<title>LUZAM - IA Internationale</title>
+<link rel="manifest" href="manifest.json">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#000;color:#fff;padding-bottom:85px}
-header{background:#111;padding:12px;text-align:center;position:sticky;top:0;z-index:100}
-header h1{color:#25D366;font-size:24px}
-nav{display:flex;background:#111;position:sticky;top:58px;z-index:100;overflow-x:auto}
-nav button{flex:1;padding:12px;background:none;color:#fff;border:none;font-size:14px;white-space:nowrap}
-nav button.actif{color:#25D366;border-bottom:3px solid #25D366}
-.page{display:none;padding:10px}
-.page.actif{display:block}
-.video{height:72vh;background:#222;border-radius:15px;margin-bottom:15px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.video img{width:100%;height:100%;object-fit:cover}
-.video-info{position:absolute;bottom:10px;left:10px;right:50px;background:rgba(0,0,0,.6);padding:8px;border-radius:10px}
-.actions{position:absolute;right:10px;bottom:60px;display:flex;flex-direction:column;gap:12px;text-align:center}
-.actions span{background:rgba(0,0,0,.6);padding:10px;border-radius:50%;font-size:20px}
-.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px}
-.grid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:5px}
-.post{background:#111;border-radius:10px;padding:10px;margin-bottom:12px}
-.post img{width:100%;border-radius:10px;margin-top:8px}
-.msg{padding:9px 12px;margin:6px;border-radius:12px;max-width:85%}
-.moi{background:#dcf8c6;color:#000;margin-left:auto}
-.ia{background:#fff;color:#000}
-.barre{position:fixed;bottom:0;left:0;right:0;background:#111;padding:8px;display:flex;gap:5px;z-index:999}
-.barre input{flex:1;padding:12px;border-radius:25px;border:none;outline:none}
-.barre button{width:45px;height:45px;border-radius:50%;border:none;font-size:18px;color:#fff}
-.btn{padding:12px 20px;border:none;border-radius:25px;color:#fff;font-size:15px;margin:5px}
-input.champ{width:100%;padding:12px;margin:6px 0;border-radius:10px;border:none;outline:none}
+*{box-sizing:border-box}
+body{margin:0;background:#0b0f1a;font-family:Arial;color:white;display:flex;justify-content:center}
+.phone{width:100%;max-width:430px;height:100vh;background:#0b141a;display:flex;flex-direction:column}
+.header{background:#075E54;padding:10px;display:flex;align-items:center;gap:10px}
+.header img{width:42px;height:42px;border-radius:50%;border:2px solid #00ff88}
+.header .name{flex:1}
+.header small{color:#d1fae5}
+.header span{font-size:20px;cursor:pointer}
+.tabs{display:flex;background:#128C7E}
+.tabs button{flex:1;padding:12px;border:none;background:#128C7E;color:white;font-weight:bold;cursor:pointer}
+.tabs button.active{background:#075E54}
+#chat{flex:1;overflow-y:auto;padding:12px}
+.msg{max-width:80%;padding:9px 12px;border-radius:12px;margin:8px 0;font-size:15px;line-height:1.4}
+.user{background:#00a884;margin-left:auto;border-bottom-right-radius:2px}
+.bot{background:#202c33;border-bottom-left-radius:2px}
+.reply-box{background:rgba(255,255,255,0.15);padding:6px;border-left:3px solid #00ff88;font-size:12px;margin-bottom:6px;border-radius:5px}
+.msg button{background:#00ff88;border:none;padding:5px 8px;border-radius:10px;margin-top:6px;margin-right:4px;cursor:pointer;font-size:12px}
+.lang-bar{background:#202c33;padding:8px;display:flex;gap:6px;align-items:center;font-size:13px}
+.lang-bar select{padding:6px;border-radius:10px;border:none;flex:1}
+.input-bar{display:flex;gap:6px;padding:10px;background:#202c33;align-items:center}
+.input-bar input{flex:1;padding:12px;border-radius:25px;border:none;outline:none}
+.circle{width:45px;height:45px;border-radius:50%;border:none;font-size:20px;cursor:pointer;background:#00a884}
+.circle.red{background:#ff3b30}
+#emojiBox{background:#202c33;padding:10px;display:none;max-height:240px;overflow-y:auto}
+#emojiBox span{font-size:26px;cursor:pointer;margin:3px;display:inline-block}
+.tab-content{display:none;padding:15px;flex:1;overflow-y:auto}
+.tab-content.active{display:block}
+.card{background:#202c33;padding:12px;border-radius:12px;margin-bottom:10px}
+.card input,.card button{width:100%;padding:11px;margin-top:8px;border-radius:10px;border:none}
+.card button{background:#00ff88;font-weight:bold;cursor:pointer}
 </style>
 </head>
 <body>
-<header><h1>🌟 LUZAM 🌟</h1><small>Par Ushindi Kitungano Michel - Bukavu 🇨🇩</small><br><span id="nomUser">👤 Invité</span></header>
-<nav>
-<button onclick="onglet('accueil',this)" class="actif">🏠 Accueil</button>
-<button onclick="onglet('videos',this)">🎬 Vidéos</button>
-<button onclick="onglet('photos',this)">📸 Photos</button>
-<button onclick="onglet('chat',this)">💬 Chat</button>
-<button onclick="onglet('ia',this)">🤖 IA LUZAM</button>
-</nav>
-
-<!-- ACCUEIL -->
-<div id="accueil" class="page actif">
-  <div style="background:#111;padding:15px;border-radius:15px;text-align:center;">
-    <h2>Bienvenue sur LUZAM ! 🇨🇩</h2><p style="margin:8px 0;">L'application du Congo, pour l'Afrique, pour le monde !</p>
-    <button class="btn" style="background:#25D366;" onclick="creerCompte()">+ Créer mon Compte</button>
-    <button class="btn" style="background:#007bff;" onclick="onglet('videos',document.querySelectorAll('nav button')[1])">Voir les Vidéos</button>
-    <div id="formCompte" style="display:none;margin-top:10px;background:#222;padding:10px;border-radius:10px;">
-      <h3>Créer ton compte LUZAM</h3>
-      <input class="champ" id="nom" placeholder="Ton nom (ex: Michel)">
-      <input class="champ" id="ville" placeholder="Ta ville (ex: Bukavu)">
-      <button class="btn" style="background:#25D366;width:100%;" onclick="validerCompte()">Créer mon compte ✅</button>
-    </div>
-  </div>
-  <div id="mesPosts"></div>
-  <h3 style="margin:15px 0 8px;">🔥 Tendances LUZAM</h3>
-  <div class="post"><b>🌟 Michel Kitungano</b><br>Mon rêve : LUZAM devient la plus grande appli d'Afrique ! Qui est avec moi ? 🔥<br>❤️ 1.5k 💬 200 📤 Partager</div>
-  <div class="post"><b>👤 Dorcas</b><br>Bukavu est belle aujourd'hui ❤️<br><img src="https://picsum.photos/500/300?random=99"><br>❤️ 800 💬 90</div>
+<div class="phone">
+<div class="header">
+<img src="icon.png">
+<div class="name"><b>LUZAM AI 🌍</b><br><small id="t-online">En ligne • Parle toutes les langues</small></div>
+<span>📹</span><span>📞</span><span>⋮</span>
 </div>
-
-<!-- VIDEOS -->
-<div id="videos" class="page">
-  <div id="listeVideos">
-    <div class="video"><img src="https://picsum.photos/500/800?random=1"><div class="video-info"><b>@michel_luzam</b><br>Bienvenue sur LUZAM ! 🇨🇩🔥</div><div class="actions"><span onclick="like(this)">❤️<br>1k</span><span>💬 120</span><span>↗️</span></div></div>
-    <div class="video"><img src="https://picsum.photos/500/800?random=2"><div class="video-info"><b>@dorcas</b><br>Ma vie à Bukavu ❤️</div><div class="actions"><span onclick="like(this)">❤️<br>850</span><span>💬 90</span><span>↗️</span></div></div>
-  </div>
-  <center><button class="btn" style="background:#25D366;" onclick="publierVideo()">+ Publier Vidéo 🎬</button></center>
+<div class="tabs">
+<button id="btn-chat" class="active" onclick="showTab('chat')">💬 <span data-i18n="chat">Chat</span></button>
+<button id="btn-statut" onclick="showTab('statut')">📸 <span data-i18n="statut">Statut</span></button>
+<button id="btn-videos" onclick="showTab('videos')">🎵 <span data-i18n="videos">Vidéos</span></button>
+<button id="btn-telecharger" onclick="showTab('telecharger')">⬇️ <span data-i18n="download">Télécharger</span></button>
 </div>
-
-<!-- PHOTOS -->
-<div id="photos" class="page">
-  <div class="post"><b>📸 @ushindi.kitungano</b> - Bukavu<br><img src="https://picsum.photos/500/500?random=10"><br>❤️ 1.2k 💬 45<br><b>Michel :</b> Mon rêve c'est changer l'Afrique avec LUZAM ! 🔥</div>
-  <h3>Explorer</h3>
-  <div class="grid"><img src="https://picsum.photos/300/300?random=20"><img src="https://picsum.photos/300/300?random=21"><img src="https://picsum.photos/300/300?random=22"><img src="https://picsum.photos/300/300?random=23"><img src="https://picsum.photos/300/300?random=24"><img src="https://picsum.photos/300/300?random=25"></div>
-  <center><button class="btn" style="background:#E1306C;" onclick="publierPhoto()">+ Publier Photo 📸</button></center>
+<div class="lang-bar">🌍 <span data-i18n="language">Langue :</span> <select id="lang" onchange="changeLang()"><option value="fr">Français 🇫🇷</option><option value="en">English 🇺🇸</option><option value="sw">Swahili 🇨🇩</option><option value="ln">Lingala 🇨🇩</option><option value="es">Español 🇪🇸</option><option value="pt">Português 🇧🇷</option><option value="ar">العربية 🇸🇦</option><option value="hi">हिन्दी 🇮🇳</option><option value="zh">中文 🇨🇳</option></select></div>
+<div id="chat-tab" class="tab-content active" style="padding:0"><div id="chat"></div></div>
+<div id="statut-tab" class="tab-content">
+<div class="card"><h3 data-i18n="statutTitle">📸 Statut comme Instagram</h3><p data-i18n="statutDesc">Poste ta photo, tes amis la voient pendant 24h.</p><input type="file" accept="image/*,video/*"><button onclick="alert('Statut publié !')" data-i18n="publishStatut">Publier mon Statut</button></div>
+<div class="card">👑 <b>Ushindi Kitungano Michel</b><br><small data-i18n="ushindiPost">Il y a 5 min • Baraka / Bukavu 🌍</small><br><br><span data-i18n="ushindiMsg">Je construis LUZAM, la IA du monde entier ! 🔥</span></div>
 </div>
-
-<!-- CHAT -->
-<div id="chat" class="page">
-  <div style="background:#111;padding:10px;border-radius:10px;margin-bottom:10px;"><b>👤 Michel Kitungano</b><br><small>En ligne - Salut chef !</small><span style="float:right;">📞 📹</span></div>
-  <div style="background:#111;padding:10px;border-radius:10px;margin-bottom:10px;"><b>👤 Groupe Famille FEZA</b><br><small>Maman: Bonjour mes enfants ❤️</small></div>
-  <div style="background:#111;padding:10px;border-radius:10px;margin-bottom:10px;"><b>👤 Dorcas</b><br><small>Tu as vu LUZAM ?</small></div>
-  <div style="background:#111;padding:10px;border-radius:10px;margin-bottom:10px;"><b>👤 Groupe KAMAGEMA</b><br><small>Les anciens élèves...</small></div>
-  <div id="waChat"></div>
+<div id="videos-tab" class="tab-content">
+<div class="card"><h3 data-i18n="videoTitle">🎵 Vidéos comme TikTok</h3><p data-i18n="videoDesc">Scrolle, like, commente, partage.</p><video controls width="100%" style="border-radius:10px" src=""></video><button onclick="alert('Tu as liké ❤️')" data-i18n="like">❤️ Liker</button><button onclick="alert('Commentaire ajouté')" data-i18n="comment">💬 Commenter</button></div>
 </div>
-
-<!-- IA -->
-<div id="ia" class="page">
-  <div style="background:#111;padding:12px;border-radius:10px;text-align:center;">🤖 <b>IA LUZAM</b><br><small>Je parle ta langue, je parle avec voix, comme ton ami !<br>Dis-moi si tu veux que je parle ou que je m'arrête.</small></div>
-  <div id="chatBox" style="margin-top:10px;"></div>
+<div id="telecharger-tab" class="tab-content">
+<div class="card"><h3 data-i18n="dlTitle">⬇️ Télécharger Vidéo / Audio</h3><p data-i18n="dlDesc">Colle le lien YouTube / TikTok, choisis Vidéo ou Audio.</p><input id="link" data-i18n-ph="dlPlaceholder" placeholder="Colle le lien ici..."><button onclick="alert('Téléchargement bientôt activé !')" data-i18n="dlVideo">⬇️ Télécharger Vidéo</button><button style="background:#ffaa00" onclick="alert('Audio bientôt activé !')" data-i18n="dlAudio">🎵 Télécharger Audio seulement</button></div>
 </div>
-
-<div class="barre">
-  <input id="chatInput" placeholder="Écris ici... ou appuie sur 🎤">
-  <button onclick="envoyer()" style="background:#25D366;">➤</button>
-  <button onclick="parler()" style="background:#007bff;">🎤</button>
-  <button onclick="arreterVoix()" style="background:red;">⏹️</button>
-  <button onclick="appeler()" style="background:orange;">📞</button>
+<div id="emojiBox">
+<b>EMOJIS LUZAM 👑 - TOUS LES EMOJIS DU MONDE</b><br><br>
+<b>😀 VISAGES</b><br>
+<span onclick="addEmoji('😀')">😀</span><span onclick="addEmoji('😃')">😃</span><span onclick="addEmoji('😄')">😄</span><span onclick="addEmoji('😁')">😁</span><span onclick="addEmoji('😆')">😆</span><span onclick="addEmoji('😅')">😅</span><span onclick="addEmoji('🤣')">🤣</span><span onclick="addEmoji('😂')">😂</span><span onclick="addEmoji('🙂')">🙂</span><span onclick="addEmoji('🙃')">🙃</span><span onclick="addEmoji('😉')">😉</span><span onclick="addEmoji('😊')">😊</span><span onclick="addEmoji('😇')">😇</span><span onclick="addEmoji('🥰')">🥰</span><span onclick="addEmoji('😍')">😍</span><span onclick="addEmoji('🤩')">🤩</span><span onclick="addEmoji('😘')">😘</span><span onclick="addEmoji('😗')">😗</span><span onclick="addEmoji('😋')">😋</span><span onclick="addEmoji('😛')">😛</span><span onclick="addEmoji('😜')">😜</span><span onclick="addEmoji('🤪')">🤪</span><span onclick="addEmoji('😎')">😎</span><span onclick="addEmoji('🤓')">🤓</span><span onclick="addEmoji('🧐')">🧐</span><span onclick="addEmoji('🤔')">🤔</span><span onclick="addEmoji('🤨')">🤨</span><span onclick="addEmoji('😐')">😐</span><span onclick="addEmoji('🙄')">🙄</span><span onclick="addEmoji('😴')">😴</span><span onclick="addEmoji('🤯')">🤯</span><span onclick="addEmoji('🥳')">🥳</span><span onclick="addEmoji('😷')">😷</span><span onclick="addEmoji('🤒')">🤒</span><span onclick="addEmoji('🤕')">🤕</span><span onclick="addEmoji('😢')">😢</span><span onclick="addEmoji('😭')">😭</span><span onclick="addEmoji('😤')">😤</span><span onclick="addEmoji('😡')">😡</span><span onclick="addEmoji('🤬')">🤬</span><span onclick="addEmoji('😱')">😱</span><span onclick="addEmoji('😨')">😨</span><span onclick="addEmoji('🥺')">🥺</span><span onclick="addEmoji('😈')">😈</span><span onclick="addEmoji('👻')">👻</span><span onclick="addEmoji('💀')">💀</span><span onclick="addEmoji('🤖')">🤖</span><span onclick="addEmoji('👽')">👽</span><br><br>
+<b>❤️ CŒURS</b><br>
+<span onclick="addEmoji('❤️')">❤️</span><span onclick="addEmoji('🧡')">🧡</span><span onclick="addEmoji('💛')">💛</span><span onclick="addEmoji('💚')">💚</span><span onclick="addEmoji('💙')">💙</span><span onclick="addEmoji('💜')">💜</span><span onclick="addEmoji('🖤')">🖤</span><span onclick="addEmoji('🤍')">🤍</span><span onclick="addEmoji('🤎')">🤎</span><span onclick="addEmoji('💔')">💔</span><span onclick="addEmoji('💕')">💕</span><span onclick="addEmoji('💞')">💞</span><span onclick="addEmoji('💓')">💓</span><span onclick="addEmoji('💗')">💗</span><span onclick="addEmoji('💖')">💖</span><span onclick="addEmoji('💘')">💘</span><span onclick="addEmoji('💝')">💝</span><span onclick="addEmoji('💋')">💋</span><span onclick="addEmoji('💍')">💍</span><span onclick="addEmoji('🌹')">🌹</span><span onclick="addEmoji('💐')">💐</span><br><br>
+<b>👋 MAINS</b><br>
+<span onclick="addEmoji('👋')">👋</span><span onclick="addEmoji('🤚')">🤚</span><span onclick="addEmoji('🖐️')">🖐️</span><span onclick="addEmoji('✋')">✋</span><span onclick="addEmoji('🖖')">🖖</span><span onclick="addEmoji('👌')">👌</span><span onclick="addEmoji('🤌')">🤌</span><span onclick="addEmoji('🤏')">🤏</span><span onclick="addEmoji('✌️')">✌️</span><span onclick="addEmoji('🤞')">🤞</span><span onclick="addEmoji('🤟')">🤟</span><span onclick="addEmoji('🤘')">🤘</span><span onclick="addEmoji('🤙')">🤙</span><span onclick="addEmoji('👈')">👈</span><span onclick="addEmoji('👉')">👉</span><span onclick="addEmoji('👆')">👆</span><span onclick="addEmoji('👇')">👇</span><span onclick="addEmoji('☝️')">☝️</span><span onclick="addEmoji('👍')">👍</span><span onclick="addEmoji('👎')">👎</span><span onclick="addEmoji('✊')">✊</span><span onclick="addEmoji('👊')">👊</span><span onclick="addEmoji('🤛')">🤛</span><span onclick="addEmoji('🤜')">🤜</span><span onclick="addEmoji('👏')">👏</span><span onclick="addEmoji('🙌')">🙌</span><span onclick="addEmoji('👐')">👐</span><span onclick="addEmoji('🤲')">🤲</span><span onclick="addEmoji('🤝')">🤝</span><span onclick="addEmoji('🙏')">🙏</span><span onclick="addEmoji('💪')">💪</span><span onclick="addEmoji('🦾')">🦾</span><span onclick="addEmoji('👀')">👀</span><span onclick="addEmoji('👁️')">👁️</span><span onclick="addEmoji('🧠')">🧠</span><br><br>
+<b>👨‍👩‍👧 PERSONNES</b><br>
+<span onclick="addEmoji('👶')">👶</span><span onclick="addEmoji('🧒')">🧒</span><span onclick="addEmoji('👦')">👦</span><span onclick="addEmoji('👧')">👧</span><span onclick="addEmoji('🧑')">🧑</span><span onclick="addEmoji('👨')">👨</span><span onclick="addEmoji('👩')">👩</span><span onclick="addEmoji('🧓')">🧓</span><span onclick="addEmoji('👴')">👴</span><span onclick="addEmoji('👵')">👵</span><span onclick="addEmoji('👨‍👩‍👧')">👨‍👩‍👧</span><span onclick="addEmoji('👨‍👩‍👧‍👦')">👨‍👩‍👧‍👦</span><span onclick="addEmoji('👑')">👑</span><span onclick="addEmoji('🤴')">🤴</span><span onclick="addEmoji('👸')">👸</span><span onclick="addEmoji('🦸')">🦸</span><span onclick="addEmoji('🦹')">🦹</span><span onclick="addEmoji('👮')">👮</span><span onclick="addEmoji('👷')">👷</span><span onclick="addEmoji('👨‍💻')">👨‍💻</span><span onclick="addEmoji('👩‍💻')">👩‍💻</span><span onclick="addEmoji('🧑‍🎓')">🧑‍🎓</span><span onclick="addEmoji('👨‍🏫')">👨‍🏫</span><br><br>
+<b>🐶 ANIMAUX</b><br>
+<span onclick="addEmoji('🐶')">🐶</span><span onclick="addEmoji('🐱')">🐱</span><span onclick="addEmoji('🐭')">🐭</span><span onclick="addEmoji('🐹')">🐹</span><span onclick="addEmoji('🐰')">🐰</span><span onclick="addEmoji('🦊')">🦊</span><span onclick="addEmoji('🐻')">🐻</span><span onclick="addEmoji('🐼')">🐼</span><span onclick="addEmoji('🐨')">🐨</span><span onclick="addEmoji('🐯')">🐯</span><span onclick="addEmoji('🦁')">🦁</span><span onclick="addEmoji('🐮')">🐮</span><span onclick="addEmoji('🐷')">🐷</span><span onclick="addEmoji('🐸')">🐸</span><span onclick="addEmoji('🐵')">🐵</span><span onclick="addEmoji('🙈')">🙈</span><span onclick="addEmoji('🙉')">🙉</span><span onclick="addEmoji('🙊')">🙊</span><span onclick="addEmoji('🐔')">🐔</span><span onclick="addEmoji('🐧')">🐧</span><span onclick="addEmoji('🐦')">🐦</span><span onclick="addEmoji('🦅')">🦅</span><span onclick="addEmoji('🦉')">🦉</span><span onclick="addEmoji('🦇')">🦇</span><span onclick="addEmoji('🐺')">🐺</span><span onclick="addEmoji('🐗')">🐗</span><span onclick="addEmoji('🐴')">🐴</span><span onclick="addEmoji('🦄')">🦄</span><span onclick="addEmoji('🐝')">🐝</span><span onclick="addEmoji('🐛')">🐛</span><span onclick="addEmoji('🦋')">🦋</span><span onclick="addEmoji('🐌')">🐌</span><span onclick="addEmoji('🐞')">🐞</span><span onclick="addEmoji('🐜')">🐜</span><span onclick="addEmoji('🐢')">🐢</span><span onclick="addEmoji('🐍')">🐍</span><span onclick="addEmoji('🦖')">🦖</span><span onclick="addEmoji('🦕')">🦕</span><span onclick="addEmoji('🐙')">🐙</span><span onclick="addEmoji('🦑')">🦑</span><span onclick="addEmoji('🦐')">🦐</span><span onclick="addEmoji('🦀')">🦀</span><span onclick="addEmoji('🐬')">🐬</span><span onclick="addEmoji('🐳')">🐳</span><span onclick="addEmoji('🦈')">🦈</span><span onclick="addEmoji('🐊')">🐊</span><br><br>
+<b>🍔 NOURRITURE</b><br>
+<span onclick="addEmoji('🍎')">🍎</span><span onclick="addEmoji('🍌')">🍌</span><span onclick="addEmoji('🍇')">🍇</span><span onclick="addEmoji('🍓')">🍓</span><span onclick="addEmoji('🍑')">🍑</span><span onclick="addEmoji('🍍')">🍍</span><span onclick="addEmoji('🥭')">🥭</span><span onclick="addEmoji('🍉')">🍉</span><span onclick="addEmoji('🍕')">🍕</span><span onclick="addEmoji('🍔')">🍔</span><span onclick="addEmoji('🍟')">🍟</span><span onclick="addEmoji('🌭')">🌭</span><span onclick="addEmoji('🍿')">🍿</span><span onclick="addEmoji('🥪')">🥪</span><span onclick="addEmoji('🌮')">🌮</span><span onclick="addEmoji('🍩')">🍩</span><span onclick="addEmoji('🍰')">🍰</span><span onclick="addEmoji('🎂')">🎂</span><span onclick="addEmoji('🍫')">🍫</span><span onclick="addEmoji('🍦')">🍦</span><span onclick="addEmoji('☕')">☕</span><span onclick="addEmoji('🍵')">🍵</span><span onclick="addEmoji('🥤')">🥤</span><span onclick="addEmoji('🍺')">🍺</span><span onclick="addEmoji('🍷')">🍷</span><span onclick="addEmoji('🥂')">🥂</span><span onclick="addEmoji('🍾')">🍾</span><br><br>
+<b>⚽ SPORT & MUSIQUE</b><br>
+<span onclick="addEmoji('⚽')">⚽</span><span onclick="addEmoji('🏀')">🏀</span><span onclick="addEmoji('🏈')">🏈</span><span onclick="addEmoji('⚾')">⚾</span><span onclick="addEmoji('🎾')">🎾</span><span onclick="addEmoji('🏐')">🏐</span><span onclick="addEmoji('🎱')">🎱</span><span onclick="addEmoji('🏓')">🏓</span><span onclick="addEmoji('🏸')">🏸</span><span onclick="addEmoji('🥊')">🥊</span><span onclick="addEmoji('🏋️')">🏋️</span><span onclick="addEmoji('🚴')">🚴</span><span onclick="addEmoji('🏊')">🏊</span><span onclick="addEmoji('🎮')">🎮</span><span onclick="addEmoji('🎲')">🎲</span><span onclick="addEmoji('🎯')">🎯</span><span onclick="addEmoji('🎰')">🎰</span><span onclick="addEmoji('🎸')">🎸</span><span onclick="addEmoji('🎹')">🎹</span><span onclick="addEmoji('🎤')">🎤</span><span onclick="addEmoji('🎧')">🎧</span><span onclick="addEmoji('🎼')">🎼</span><span onclick="addEmoji('🥁')">🥁</span><span onclick="addEmoji('🎺')">🎺</span><span onclick="addEmoji('🎻')">🎻</span><br><br>
+<b>🚗 VOYAGE & OBJETS</b><br>
+<span onclick="addEmoji('🚗')">🚗</span><span onclick="addEmoji('🚕')">🚕</span><span onclick="addEmoji('🚌')">🚌</span><span onclick="addEmoji('✈️')">✈️</span><span onclick="addEmoji('🚀')">🚀</span><span onclick="addEmoji('🚁')">🚁</span><span onclick="addEmoji('🚢')">🚢</span><span onclick="addEmoji('🏠')">🏠</span><span onclick="addEmoji('🏫')">🏫</span><span onclick="addEmoji('🏥')">🏥</span><span onclick="addEmoji('💻')">💻</span><span onclick="addEmoji('📱')">📱</span><span onclick="addEmoji('📷')">📷</span><span onclick="addEmoji('🎥')">🎥</span><span onclick="addEmoji('⌚')">⌚</span><span onclick="addEmoji('💡')">💡</span><span onclick="addEmoji('🔑')">🔑</span><span onclick="addEmoji('🔒')">🔒</span><span onclick="addEmoji('📚')">📚</span><span onclick="addEmoji('✏️')">✏️</span><span onclick="addEmoji('📝')">📝</span><span onclick="addEmoji('💰')">💰</span><span onclick="addEmoji('💵')">💵</span><span onclick="addEmoji('💳')">💳</span><span onclick="addEmoji('🎁')">🎁</span><span onclick="addEmoji('💣')">💣</span><span onclick="addEmoji('🔥')">🔥</span><span onclick="addEmoji('⭐')">⭐</span><span onclick="addEmoji('🌙')">🌙</span><span onclick="addEmoji('☀️')">☀️</span><span onclick="addEmoji('🌈')">🌈</span><span onclick="addEmoji('⚡')">⚡</span><span onclick="addEmoji('❄️')">❄️</span><span onclick="addEmoji('🔮')">🔮</span><span onclick="addEmoji('✨')">✨</span><span onclick="addEmoji('🎉')">🎉</span><span onclick="addEmoji('🎊')">🎊</span><span onclick="addEmoji('🏆')">🏆</span><span onclick="addEmoji('🥇')">🥇</span><br><br>
+<b>🌍 DRAPEAUX DU MONDE</b><br>
+<span onclick="addEmoji('🇨🇩')">🇨🇩</span><span onclick="addEmoji('🇨🇬')">🇨🇬</span><span onclick="addEmoji('🇷🇼')">🇷🇼</span><span onclick="addEmoji('🇧🇮')">🇧🇮</span><span onclick="addEmoji('🇹🇿')">🇹🇿</span><span onclick="addEmoji('🇰🇪')">🇰🇪</span><span onclick="addEmoji('🇺🇬')">🇺🇬</span><span onclick="addEmoji('🇿🇦')">🇿🇦</span><span onclick="addEmoji('🇳🇬')">🇳🇬</span><span onclick="addEmoji('🇬🇭')">🇬🇭</span><span onclick="addEmoji('🇨🇮')">🇨🇮</span><span onclick="addEmoji('🇸🇳')">🇸🇳</span><span onclick="addEmoji('🇲🇱')">🇲🇱</span><span onclick="addEmoji('🇨🇲')">🇨🇲</span><span onclick="addEmoji('🇬🇦')">🇬🇦</span><span onclick="addEmoji('🇪🇹')">🇪🇹</span><span onclick="addEmoji('🇪🇬')">🇪🇬</span><span onclick="addEmoji('🇲🇦')">🇲🇦</span><span onclick="addEmoji('🇩🇿')">🇩🇿</span><span onclick="addEmoji('🇹🇳')">🇹🇳</span><span onclick="addEmoji('🇦🇴')">🇦🇴</span><span onclick="addEmoji('🇿🇲')">🇿🇲</span><span onclick="addEmoji('🇿🇼')">🇿🇼</span><span onclick="addEmoji('🇲🇿')">🇲🇿</span><span onclick="addEmoji('🇲🇬')">🇲🇬</span><br>
+<span onclick="addEmoji('🇫🇷')">🇫🇷</span><span onclick="addEmoji('🇧🇪')">🇧🇪</span><span onclick="addEmoji('🇨🇭')">🇨🇭</span><span onclick="addEmoji('🇩🇪')">🇩🇪</span><span onclick="addEmoji('🇮🇹')">🇮🇹</span><span onclick="addEmoji('🇪🇸')">🇪🇸</span><span onclick="addEmoji('🇵🇹')">🇵🇹</span><span onclick="addEmoji('🇬🇧')">🇬🇧</span><span onclick="addEmoji('🇮🇪')">🇮🇪</span><span onclick="addEmoji('🇳🇱')">🇳🇱</span><span onclick="addEmoji('🇱🇺')">🇱🇺</span><span onclick="addEmoji('🇦🇹')">🇦🇹</span><span onclick="addEmoji('🇵🇱')">🇵🇱</span><span onclick="addEmoji('🇬🇷')">🇬🇷</span><span onclick="addEmoji('🇹🇷')">🇹🇷</span><span onclick="addEmoji('🇷🇺')">🇷🇺</span><span onclick="addEmoji('🇺🇦')">🇺🇦</span><span onclick="addEmoji('🇸🇪')">🇸🇪</span><span onclick="addEmoji('🇳🇴')">🇳🇴</span><span onclick="addEmoji('🇩🇰')">🇩🇰</span><span onclick="addEmoji('🇫🇮')">🇫🇮</span><span onclick="addEmoji('🇮🇸')">🇮🇸</span><span onclick="addEmoji('🇭🇷')">🇭🇷</span><span onclick="addEmoji('🇷🇸')">🇷🇸</span><span onclick="addEmoji('🇷🇴')">🇷🇴</span><br>
+<span onclick="addEmoji('🇺🇸')">🇺🇸</span><span onclick="addEmoji('🇨🇦')">🇨🇦</span><span onclick="addEmoji('🇲🇽')">🇲🇽</span><span onclick="addEmoji('🇧🇷')">🇧🇷</span><span onclick="addEmoji('🇦🇷')">🇦🇷</span><span onclick="addEmoji('🇨🇱')">🇨🇱</span><span onclick="addEmoji('🇨🇴')">🇨🇴</span><span onclick="addEmoji('🇵🇪')">🇵🇪</span><span onclick="addEmoji('🇻🇪')">🇻🇪</span><span onclick="addEmoji('🇨🇺')">🇨🇺</span><span onclick="addEmoji('🇩🇴')">🇩🇴</span><span onclick="addEmoji('🇭🇹')">🇭🇹</span><span onclick="addEmoji('🇯🇲')">🇯🇲</span><span onclick="addEmoji('🇵🇦')">🇵🇦</span><span onclick="addEmoji('🇪🇨')">🇪🇨</span><span onclick="addEmoji('🇧🇴')">🇧🇴</span><br>
+<span onclick="addEmoji('🇨🇳')">🇨🇳</span><span onclick="addEmoji('🇯🇵')">🇯🇵</span><span onclick="addEmoji('🇰🇷')">🇰🇷</span><span onclick="addEmoji('🇮🇳')">🇮🇳</span><span onclick="addEmoji('🇵🇰')">🇵🇰</span><span onclick="addEmoji('🇧🇩')">🇧🇩</span><span onclick="addEmoji('🇹🇭')">🇹🇭</span><span onclick="addEmoji('🇻🇳')">🇻🇳</span><span onclick="addEmoji('🇵🇭')">🇵🇭</span><span onclick="addEmoji('🇮🇩')">🇮🇩</span><span onclick="addEmoji('🇲🇾')">🇲🇾</span><span onclick="addEmoji('🇸🇬')">🇸🇬</span><span onclick="addEmoji('🇲🇲')">🇲🇲</span><span onclick="addEmoji('🇳🇵')">🇳🇵</span><span onclick="addEmoji('🇱🇰')">🇱🇰</span><span onclick="addEmoji('🇦🇫')">🇦🇫</span><span onclick="addEmoji('🇮🇷')">🇮🇷</span><span onclick="addEmoji('🇮🇶')">🇮🇶</span><span onclick="addEmoji('🇸🇦')">🇸🇦</span><span onclick="addEmoji('🇦🇪')">🇦🇪</span><span onclick="addEmoji('🇶🇦')">🇶🇦</span><span onclick="addEmoji('🇰🇼')">🇰🇼</span><span onclick="addEmoji('🇯🇴')">🇯🇴</span><span onclick="addEmoji('🇱🇧')">🇱🇧</span><span onclick="addEmoji('🇮🇱')">🇮🇱</span><span onclick="addEmoji('🇾🇪')">🇾🇪</span><br>
+<span onclick="addEmoji('🇦🇺')">🇦🇺</span><span onclick="addEmoji('🇳🇿')">🇳🇿</span><span onclick="addEmoji('🇫🇯')">🇫🇯</span><span onclick="addEmoji('🇵🇬')">🇵🇬</span><span onclick="addEmoji('🇪🇺')">🇪🇺</span><span onclick="addEmoji('🇺🇳')">🇺🇳</span><span onclick="addEmoji('🏳️')">🏳️</span><span onclick="addEmoji('🏴')">🏴</span><span onclick="addEmoji('🏁')">🏁</span><span onclick="addEmoji('🚩')">🚩</span>
 </div>
-
+<div class="input-bar">
+<button class="circle" style="background:#333" onclick="toggleEmoji()">😀</button>
+<button class="circle" style="background:#333" onclick="document.getElementById('fileInput').click()">+</button>
+<input type="file" id="fileInput" hidden onchange="sendFile(this)">
+<input id="input" placeholder="Écris à LUZAM dans ta langue...">
+<button class="circle" id="micBtn" onclick="toggleVoice()">🎤</button>
+<button class="circle" onclick="send()">➤</button>
+</div>
+<p style="text-align:center;font-size:11px;margin:4px" data-i18n="footer">Créé par Ushindi Kitungano Michel - Baraka / Bukavu 🌍</p>
+</div>
 <script>
-let monNom = localStorage.getItem('luzam_nom') || "";
-if(monNom) document.getElementById('nomUser').innerText = "👤 " + monNom;
-function onglet(id, btn){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('actif'));
-  document.getElementById(id).classList.add('actif');
-  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('actif'));
-  if(btn) btn.classList.add('actif');
+const LANGS={
+fr:{chat:"Chat",statut:"Statut",videos:"Vidéos",download:"Télécharger",language:"Langue :",statutTitle:"📸 Statut comme Instagram",statutDesc:"Poste ta photo, tes amis la voient pendant 24h.",publishStatut:"Publier mon Statut",ushindiPost:"Il y a 5 min • Baraka / Bukavu 🌍",ushindiMsg:"Je construis LUZAM, la IA du monde entier ! 🔥",videoTitle:"🎵 Vidéos comme TikTok",videoDesc:"Scrolle, like, commente, partage.",like:"❤️ Liker",comment:"💬 Commenter",dlTitle:"⬇️ Télécharger Vidéo / Audio",dlDesc:"Colle le lien YouTube / TikTok, choisis Vidéo ou Audio.",dlPlaceholder:"Colle le lien ici...",dlVideo:"⬇️ Télécharger Vidéo",dlAudio:"🎵 Télécharger Audio seulement",footer:"Créé par Ushindi Kitungano Michel - Baraka / Bukavu 🌍",online:"En ligne • Parle toutes les langues",input:"Écris à LUZAM dans ta langue...",welcome:"Salut chef ! 🙏 C'est LUZAM. Je suis créé par Ushindi Kitungano Michel de Baraka / Bukavu. Je parle toutes les langues, je réponds à tout, dans tous les domaines. Écris-moi dans ta langue, ou clique sur 🎤 pour parler, et sur 🔊 pour m'écouter. Tu peux aussi faire ↩️ Reply comme WhatsApp.",listen:"🔊 Écouter",reply:"↩️ Reply",copy:"📋 Copier"},
+en:{chat:"Chat",statut:"Status",videos:"Videos",download:"Download",language:"Language:",statutTitle:"📸 Status like Instagram",statutDesc:"Post your photo, your friends see it for 24h.",publishStatut:"Publish my Status",ushindiPost:"5 min ago • Baraka / Bukavu 🌍",ushindiMsg:"I am building LUZAM, the AI of the whole world! 🔥",videoTitle:"🎵 Videos like TikTok",videoDesc:"Scroll, like, comment, share.",like:"❤️ Like",comment:"💬 Comment",dlTitle:"⬇️ Download Video / Audio",dlDesc:"Paste YouTube / TikTok link, choose Video or Audio.",dlPlaceholder:"Paste link here...",dlVideo:"⬇️ Download Video",dlAudio:"🎵 Download Audio only",footer:"Created by Ushindi Kitungano Michel - Baraka / Bukavu 🌍",online:"Online • Speaks all languages",input:"Write to LUZAM in your language...",welcome:"Hi boss! 🙏 This is LUZAM. I was created by Ushindi Kitungano Michel from Baraka / Bukavu. I speak all languages, I answer everything, in all fields. Write to me in your language, or click 🎤 to speak, and 🔊 to listen to me. You can also do ↩️ Reply like WhatsApp.",listen:"🔊 Listen",reply:"↩️ Reply",copy:"📋 Copy"},
+sw:{chat:"Mazungumzo",statut:"Hali",videos:"Video",download:"Pakua",language:"Lugha:",statutTitle:"📸 Hali kama Instagram",statutDesc:"Weka picha yako, marafiki wako wanaiona kwa saa 24.",publishStatut:"Chapisha Hali Yangu",ushindiPost:"Dakika 5 zilizopita • Baraka / Bukavu 🌍",ushindiMsg:"Ninajenga LUZAM, AI ya dunia nzima! 🔥",videoTitle:"🎵 Video kama TikTok",videoDesc:"Sogeza, penda, toa maoni, shiriki.",like:"❤️ Penda",comment:"💬 Toa maoni",dlTitle:"⬇️ Pakua Video / Sauti",dlDesc:"Weka link ya YouTube / TikTok, chagua Video au Sauti.",dlPlaceholder:"Weka link hapa...",dlVideo:"⬇️ Pakua Video",dlAudio:"🎵 Pakua Sauti tu",footer:"Imetengenezwa na Ushindi Kitungano Michel - Baraka / Bukavu 🌍",online:"Mtandaoni • Inazungumza lugha zote",input:"Andika kwa LUZAM kwa lugha yako...",welcome:"Mambo boss! 🙏 Hii ni LUZAM. Nimetengenezwa na Ushindi Kitungano Michel kutoka Baraka / Bukavu. Ninazungumza lugha zote, ninajibu kila kitu. Niandikie kwa lugha yako, au bonyeza 🎤 kuzungumza, na 🔊 kunisikiliza. Unaweza pia kufanya ↩️ Reply kama WhatsApp.",listen:"🔊 Sikiliza",reply:"↩️ Reply",copy:"📋 Nakili"},
+ln:{chat:"Masolo",statut:"Statut",videos:"Ba Video",download:"Kotélécharger",language:"Lokota:",statutTitle:"📸 Statut lokola Instagram",statutDesc:"Tia elili na yo, baninga na yo bamoni yango pendant 24h.",publishStatut:"Publier Statut na nga",ushindiPost:"Il y a 5 min • Baraka / Bukavu 🌍",ushindiMsg:"Nazali kotonga LUZAM, IA ya mokili mobimba ! 🔥",videoTitle:"🎵 Ba Video lokola TikTok",videoDesc:"Scroll, like, commenter, partager.",like:"❤️ Liker",comment:"💬 Commenter",dlTitle:"⬇️ Kotélécharger Video / Audio",dlDesc:"Tia lien YouTube / TikTok, pona Video to Audio.",dlPlaceholder:"Tia lien awa...",dlVideo:"⬇️ Télécharger Video",dlAudio:"🎵 Télécharger Audio kaka",footer:"Esalemi na Ushindi Kitungano Michel - Baraka / Bukavu 🌍",online:"En ligne • Elobaka ba langues nionso",input:"Komela LUZAM na lokota na yo...",welcome:"Mbote chef ! 🙏 Oyo eza LUZAM. Nasalemi na Ushindi Kitungano Michel ya Baraka / Bukavu. Nalobaka ba langues nionso, nazali ko repondre na nionso. Komela nga na lokota na yo, to beta 🎤 po oloba, na 🔊 po oyoka nga. Okoki pe kosala ↩️ Reply lokola WhatsApp.",listen:"🔊 Yoka",reply:"↩️ Reply",copy:"📋 Copier"},
+es:{chat:"Chat",statut:"Estado",videos:"Videos",download:"Descargar",language:"Idioma:",statutTitle:"📸 Estado como Instagram",statutDesc:"Publica tu foto, tus amigos la ven durante 24h.",publishStatut:"Publicar mi Estado",ushindiPost:"Hace 5 min • Baraka / Bukavu 🌍",ushindiMsg:"¡Estoy construyendo LUZAM, la IA del mundo entero! 🔥",videoTitle:"🎵 Videos como TikTok",videoDesc:"Desliza, da like, comenta, comparte.",like:"❤️ Me gusta",comment:"💬 Comentar",dlTitle:"⬇️ Descargar Video / Audio",dlDesc:"Pega el enlace de YouTube / TikTok, elige Video o Audio.",dlPlaceholder:"Pega el enlace aquí...",dlVideo:"⬇️ Descargar Video",dlAudio:"🎵 Descargar solo Audio",footer:"Creado por Ushindi Kitungano Michel - Baraka / Bukavu 🌍",online:"En línea • Habla todos los idiomas",input:"Escribe a LUZAM en tu idioma...",welcome:"¡Hola jefe! 🙏 Soy LUZAM. Fui creado por Ushindi Kitungano Michel de Baraka / Bukavu. Hablo todos los idiomas, respondo a todo, en todos los campos. Escríbeme en tu idioma, o pulsa 🎤 para hablar, y 🔊 para escucharme. También puedes hacer ↩️ Reply como WhatsApp.",listen:"🔊 Escuchar",reply:"↩️ Responder",copy:"📋 Copiar"},
+pt:{chat:"Chat",statut:"Status",videos:"Vídeos",download:"Baixar",language:"Idioma:",statutTitle:"📸 Status como Instagram",statutDesc:"Poste sua foto, seus amigos veem por 24h.",publishStatut:"Publicar meu Status",ushindiPost:"Há 5 min • Baraka / Bukavu 🌍",ushindiMsg:"Estou construindo LUZAM, a IA do mundo inteiro! 🔥",videoTitle:"🎵 Vídeos como TikTok",videoDesc:"Role, curta, comente, compartilhe.",like:"❤️ Curtir",comment:"💬 Comentar",dlTitle:"⬇️ Baixar Vídeo / Áudio",dlDesc:"Cole o link do YouTube / TikTok, escolha Vídeo ou Áudio.",dlPlaceholder:"Cole o link aqui...",dlVideo:"⬇️ Baixar Vídeo",dlAudio:"🎵 Baixar só Áudio",footer:"Criado por Ushindi Kitungano Michel - Baraka / Bukavu 🌍",online:"Online • Fala todas as línguas",input:"Escreva para LUZAM no seu idioma...",welcome:"Oi chefe! 🙏 Sou LUZAM. Fui criado por Ushindi Kitungano Michel de Baraka / Bukavu. Falo todas as línguas, respondo tudo, em todas as áreas. Escreva para mim no seu idioma, ou clique em 🎤 para falar, e 🔊 para me ouvir. Você também pode fazer ↩️ Reply como WhatsApp.",listen:"🔊 Ouvir",reply:"↩️ Responder",copy:"📋 Copiar"},
+ar:{chat:"محادثة",statut:"الحالة",videos:"فيديوهات",download:"تحميل",language:"اللغة:",statutTitle:"📸 الحالة مثل انستغرام",statutDesc:"انشر صورتك، أصدقاؤك يرونها لمدة 24 ساعة.",publishStatut:"نشر حالتي",ushindiPost:"قبل 5 دقائق • باراكا / بوكافو 🌍",ushindiMsg:"أنا أبني LUZAM، ذكاء اصطناعي للعالم كله! 🔥",videoTitle:"🎵 فيديوهات مثل تيك توك",videoDesc:"مرر، أعجب، علق، شارك.",like:"❤️ أعجبني",comment:"💬 تعليق",dlTitle:"⬇️ تحميل فيديو / صوت",dlDesc:"الصق رابط يوتيوب / تيك توك، اختر فيديو أو صوت.",dlPlaceholder:"الصق الرابط هنا...",dlVideo:"⬇️ تحميل فيديو",dlAudio:"🎵 تحميل الصوت فقط",footer:"تم إنشاؤه بواسطة أوشيندي كيتونغانو ميشيل - باراكا / بوكافو 🌍",online:"متصل • يتحدث جميع اللغات",input:"اكتب إلى LUZAM بلغتك...",welcome:"أهلاً يا رئيس! 🙏 أنا LUZAM. تم إنشائي بواسطة أوشيندي كيتونغانو ميشيل من باراكا / بوكافو. أتحدث جميع اللغات، أجيب على كل شيء. اكتب لي بلغتك، أو اضغط 🎤 للتحدث، و 🔊 للاستماع إلي. يمكنك أيضاً عمل ↩️ رد مثل واتساب.",listen:"🔊 استمع",reply:"↩️ رد",copy:"📋 نسخ"},
+hi:{chat:"चैट",statut:"स्टेटस",videos:"वीडियो",download:"डाउनलोड",language:"भाषा:",statutTitle:"📸 इंस्टाग्राम जैसा स्टेटस",statutDesc:"अपनी फोटो पोस्ट करें, आपके दोस्त 24 घंटे तक देखते हैं।",publishStatut:"मेरा स्टेटस प्रकाशित करें",ushindiPost:"5 मिनट पहले • बराका / बुकावु 🌍",ushindiMsg:"मैं LUZAM बना रहा हूँ, पूरी दुनिया की AI! 🔥",videoTitle:"🎵 टिकटॉक जैसे वीडियो",videoDesc:"स्क्रॉल करें, लाइक करें, कमेंट करें, शेयर करें।",like:"❤️ लाइक",comment:"💬 कमेंट",dlTitle:"⬇️ वीडियो / ऑडियो डाउनलोड करें",dlDesc:"YouTube / TikTok लिंक पेस्ट करें, वीडियो या ऑडियो चुनें।",dlPlaceholder:"लिंक यहाँ पेस्ट करें...",dlVideo:"⬇️ वीडियो डाउनलोड करें",dlAudio:"🎵 केवल ऑडियो डाउनलोड करें",footer:"उशिंदी कितुंगानो मिशेल द्वारा बनाया गया - बराका / बुकावु 🌍",online:"ऑनलाइन • सभी भाषाएँ बोलता है",input:"अपनी भाषा में LUZAM को लिखें...",welcome:"नमस्ते बॉस! 🙏 मैं LUZAM हूँ। मुझे उशिंदी कितुंगानो मिशेल ने बराका / बुकावु से बनाया है। मैं सभी भाषाएँ बोलता हूँ, हर चीज़ का जवाब देता हूँ। मुझे अपनी भाषा में लिखें, या बोलने के लिए 🎤 दबाएँ, और सुनने के लिए 🔊 दबाएँ। आप WhatsApp की तरह ↩️ Reply भी कर सकते हैं।",listen:"🔊 सुनें",reply:"↩️ जवाब",copy:"📋 कॉपी"},
+zh:{chat:"聊天",statut:"状态",videos:"视频",download:"下载",language:"语言：",statutTitle:"📸 像 Instagram 一样的状态",statutDesc:"发布你的照片，你的朋友可以看到 24 小时。",publishStatut:"发布我的状态",ushindiPost:"5 分钟前 • Baraka / Bukavu 🌍",ushindiMsg:"我正在建造 LUZAM，全世界的 AI！🔥",videoTitle:"🎵 像 TikTok 一样的视频",videoDesc:"滚动、点赞、评论、分享。",like:"❤️ 点赞",comment:"💬 评论",dlTitle:"⬇️ 下载视频 / 音频",dlDesc:"粘贴 YouTube / TikTok 链接，选择视频或音频。",dlPlaceholder:"在此粘贴链接...",dlVideo:"⬇️ 下载视频",dlAudio:"🎵 仅下载音频",footer:"由 Ushindi Kitungano Michel 创建 - Baraka / Bukavu 🌍",online:"在线 • 会说所有语言",input:"用你的语言写给 LUZAM...",welcome:"你好老板！🙏 我是 LUZAM。我由来自 Baraka / Bukavu 的 Ushindi Kitungano Michel 创建。我会说所有语言，回答所有问题。用你的语言写给我，或点击 🎤 说话，点击 🔊 听我说话。你也可以像 WhatsApp 一样做 ↩️ 回复。",listen:"🔊 收听",reply:"↩️ 回复",copy:"📋 复制"}
+};
+let replyTo=null,lastBotText="",isRecording=false,recognition=null,currentLang='fr';
+function changeLang(){
+currentLang=document.getElementById('lang').value;
+let t=LANGS[currentLang]||LANGS.fr;
+document.querySelectorAll('[data-i18n]').forEach(el=>{let k=el.getAttribute('data-i18n');if(t[k]) el.innerText=t[k];});
+document.querySelectorAll('[data-i18n-ph]').forEach(el=>{let k=el.getAttribute('data-i18n-ph');if(t[k]) el.placeholder=t[k];});
+document.getElementById('t-online').innerText=t.online;
+document.getElementById('input').placeholder=t.input;
+document.getElementById('chat').innerHTML='';
+addMsg(t.welcome,'bot',null);
 }
-function like(el){ el.style.background='red'; alert('Tu as aimé ❤️'); }
-function creerCompte(){ document.getElementById('formCompte').style.display='block'; }
-function validerCompte(){
-  let n=document.getElementById('nom').value.trim();
-  let v=document.getElementById('ville').value.trim() || "Bukavu";
-  if(!n){ alert("Écris ton nom d'abord chef !"); return; }
-  monNom=n; localStorage.setItem('luzam_nom', n);
-  document.getElementById('nomUser').innerText="👤 "+n+" - "+v;
-  document.getElementById('formCompte').style.display='none';
-  alert("Bienvenue "+n+" ! 🎉 Ton compte LUZAM est créé ! Maintenant tu peux publier !");
-}
-function publierVideo(){
-  if(!monNom){ alert("Crée ton compte d'abord ! Clique sur Accueil > Créer mon Compte"); onglet('accueil',document.querySelectorAll('nav button')[0]); return; }
-  let t=prompt("Qu'est-ce que tu veux dire dans ta vidéo ?");
-  if(t){ document.getElementById('listeVideos').innerHTML = "<div class='video'><img src='https://picsum.photos/500/800?random="+Math.floor(Math.random()*100)+"'><div class='video-info'><b>@"+monNom+"</b><br>"+t+"</div><div class='actions'><span>❤️ 0</span><span>💬 0</span></div></div>" + document.getElementById('listeVideos').innerHTML; alert("Ta vidéo est publiée ! 🎬🔥"); }
-}
-function publierPhoto(){
-  if(!monNom){ alert("Crée ton compte d'abord !"); onglet('accueil',document.querySelectorAll('nav button')[0]); return; }
-  let t=prompt("Légende de ta photo ?");
-  if(t){ document.getElementById('mesPosts').innerHTML = "<div class='post'><b>📸 @"+monNom+"</b><br>"+t+"<br>❤️ 0 💬 0 - Juste maintenant</div>" + document.getElementById('mesPosts').innerHTML; alert("Ta photo est publiée ! 📸"); onglet('accueil',document.querySelectorAll('nav button')[0]); }
-}
-function parler(){
-  try{
-    const Rec = window.SpeechRecognition || window.webkitSpeechRecognition;
-    const rec = new Rec(); rec.lang='fr-FR';
-    rec.onresult=(e)=>{ document.getElementById('chatInput').value=e.results[0][0].transcript; envoyer(); };
-    rec.start(); alert('Parle maintenant chef, je t’écoute... 🎤');
-  }catch(e){ alert('Ton téléphone ne supporte pas la voix, écris alors !'); }
-}
-function ecouterTexte(t){ speechSynthesis.cancel(); let v=new SpeechSynthesisUtterance(t); v.lang='fr-FR'; speechSynthesis.speak(v); }
-function arreterVoix(){ speechSynthesis.cancel(); alert('Ok chef, je m’arrête ! ⏹️'); }
-function appeler(){ alert('📞 Appel LUZAM en cours... Bientôt appel vocal + vidéo !'); }
-async function envoyer(){
-  let txt=document.getElementById('chatInput').value.trim(); if(!txt) return;
-  let pageActuelle=document.querySelector('.page.actif').id;
-  let cible = pageActuelle==='chat' ? document.getElementById('waChat') : document.getElementById('chatBox');
-  cible.innerHTML+="<div class='msg moi'>"+txt+"</div>";
-  document.getElementById('chatInput').value="";
-  try{
-    let r=await fetch('/api/ai',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:txt})});
-    let d=await r.json();
-    cible.innerHTML+="<div class='msg ia'>"+d.reply+"<br><button onclick=\"ecouterTexte('"+d.reply.replace(/'/g,'').replace(/\"/g,'').substring(0,500)+"')\" style='margin-top:5px;padding:5px 10px;border-radius:15px;border:none;background:#007bff;color:#fff;'>🔊 Écouter</button> <button onclick='arreterVoix()' style='padding:5px 10px;border-radius:15px;border:none;background:red;color:#fff;'>⏹️ Stop</button></div>";
-  }catch(e){ cible.innerHTML+="<div class='msg ia'>Salut chef ! Je suis là, dis-moi tout !</div>"; }
-  window.scrollTo(0,document.body.scrollHeight);
-}
+function showTab(t){['chat','statut','videos','telecharger'].forEach(x=>{document.getElementById(x+'-tab').classList.toggle('active',x===t);document.getElementById('btn-'+x).classList.toggle('active',x===t);});document.querySelector('.input-bar').style.display=t==='chat'?'flex':'none';}
+function toggleEmoji(){let b=document.getElementById('emojiBox');b.style.display=b.style.display==='block'?'none':'block';}
+function addEmoji(e){document.getElementById('input').value+=e;}
+function setReply(txt){replyTo=txt;document.getElementById('input').placeholder="↩️ "+txt.slice(0,40)+"...";document.getElementById('input').focus();}
+function sendFile(el){if(el.files[0]) addMsg("📎 "+el.files[0].name,'user',null);}
+async function send(){let input=document.getElementById('input');let text=input.value.trim();if(!text) return;addMsg(text,'user',replyTo);input.value="";let lang=currentLang;let currentReply=replyTo;replyTo=null;try{let res=await fetch('/api/ai',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text,langue:lang,replyTo:currentReply})});let data=await res.json();addMsg(data.reply,'bot',null);}catch(e){addMsg("LUZAM est là chef. Réessaie.",'bot',null);}}
+function addMsg(text,cls,reply){let t=LANGS[currentLang]||LANGS.fr;let chat=document.getElementById('chat');let d=document.createElement('div');d.className='msg '+cls;if(reply) d.innerHTML+=`<div class="reply-box">↩️ ${reply}</div>`;d.innerHTML+=`<div>${text}</div>`;if(cls==='bot'){lastBotText=text;d.innerHTML+=`<br><button onclick="speakText()">${t.listen}</button> <button onclick="setReply('${text.replace(/'/g,'').slice(0,80)}')">${t.reply}</button> <button onclick="copyText()">${t.copy}</button>`;}else{d.innerHTML+=`<br><button onclick="setReply('${text.replace(/'/g,'').slice(0,80)}')">${t.reply}</button>`;}chat.appendChild(d);chat.scrollTop=chat.scrollHeight;}
+function copyText(){navigator.clipboard.writeText(lastBotText);alert("Copié !");}
+function speakText(){let u=new SpeechSynthesisUtterance(lastBotText);let lang=currentLang;if(lang==='sw') u.lang='sw-KE';else if(lang==='ln') u.lang='ln-CD';else if(lang==='ar') u.lang='ar-SA';else if(lang==='hi') u.lang='hi-IN';else if(lang==='zh') u.lang='zh-CN';else u.lang=lang+'-'+lang.toUpperCase();speechSynthesis.speak(u);}
+function toggleVoice(){let btn=document.getElementById('micBtn');if(isRecording){if(recognition) recognition.stop();isRecording=false;btn.innerText='🎤';btn.classList.remove('red');return;}recognition=new (window.SpeechRecognition||window.webkitSpeechRecognition)();recognition.lang=currentLang;recognition.onresult=e=>{document.getElementById('input').value=e.results[0][0].transcript;send();};recognition.onend=()=>{isRecording=false;btn.innerText='🎤';btn.classList.remove('red');};recognition.start();isRecording=true;btn.innerText='⏹️';btn.classList.add('red');}
+document.getElementById('input').addEventListener('keypress',e=>{if(e.key==='Enter') send();});
+addMsg(LANGS.fr.welcome,'bot',null);
 </script>
 </body>
 </html>
