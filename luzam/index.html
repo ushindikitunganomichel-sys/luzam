@@ -1,146 +1,283 @@
+<!DOCTYPE` jusqu'à `</html>` :
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LUZAM</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',Arial,sans-serif}
-body{background:#0a0a0f;color:#fff;padding-bottom:80px}
-
-/* HEADER COMME DANS L'IMAGE - DEGRADE VIOLET -> ORANGE */
-header{
-  background:linear-gradient(90deg,#6d28d9,#a855f7,#ec4899,#f97316);
-  padding:18px 15px;
-  display:flex;justify-content:space-between;align-items:center;
-  border-radius:0 0 20px 20px;
-}
-.logo{font-size:42px;font-weight:900;letter-spacing:-1px;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.3)}
-.logo span{background:linear-gradient(180deg,#fff,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.flower{font-size:42px;filter:drop-shadow(0 0 10px rgba(255,255,255,.5))}
-.top-icons{display:flex;gap:15px;font-size:22px}
-
-.profile{padding:15px}
-.avatar{width:75px;height:75px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#f97316);display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:900;border:3px solid #a855f7}
-.btn-row{display:flex;gap:8px;margin-top:12px}
-.btn{flex:1;padding:12px;border:none;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer}
-.violet{background:#a855f7;color:#fff}.gray{background:#2a2a3e;color:#fff}
-
-.menu{background:#1a1a2e;margin:10px;border-radius:16px;overflow:hidden}
-.menu-item{padding:14px 15px;border-bottom:1px solid #222;cursor:pointer;font-size:15px}
-.menu-item b{font-size:15px}
-
-.create{background:#1a1a2e;margin:10px;padding:12px;border-radius:16px;display:flex;gap:10px;align-items:center}
-.create input{flex:1;background:#2a2a3e;border:none;padding:13px;border-radius:25px;color:#fff;outline:none;font-size:14px}
-.post{background:#1a1a2e;margin:10px;border-radius:16px;padding:14px}
-.post-img{height:180px;background:linear-gradient(135deg,#a855f7,#f97316,#ec4899);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:45px;font-weight:900;margin:10px 0}
-.actions{display:flex;justify-content:space-around;border-top:1px solid #333;padding-top:10px}
-.actions button{background:none;border:none;color:#ccc;font-size:14px;cursor:pointer}
-
-nav{position:fixed;bottom:0;left:0;right:0;background:#1a1a2e;display:flex;justify-content:space-around;padding:14px;border-top:1px solid #333}
-nav button{background:none;border:none;color:#fff;font-size:24px;cursor:pointer}
-
-/* ===== CHAT LUZAM AI - COMME DANS L'IMAGE ===== */
-#aiChat{display:none;position:fixed;inset:0;background:#0a0a0f;z-index:100;flex-direction:column}
-#aiChat.open{display:flex}
-.ai-head{
-  background:linear-gradient(90deg,#6d28d9,#a855f7,#f97316);
-  padding:16px;display:flex;gap:12px;align-items:center;
-  border-radius:0 0 20px 20px;
-}
-.ai-head h3{font-size:24px;font-weight:900}
-.ai-head small{color:#fde68a;font-size:13px}
-#msgs{flex:1;overflow:auto;padding:15px;display:flex;flex-direction:column;gap:14px}
-.msg{max-width:85%;padding:16px 18px;border-radius:22px;font-size:15px;line-height:1.5;font-weight:600}
-.me{
-  align-self:flex-end;
-  background:linear-gradient(135deg,#a855f7,#f97316);
-  color:#fff;border-bottom-right-radius:6px;
-}
-.ai{
-  align-self:flex-start;
-  background:linear-gradient(135deg,#7c3aed,#a855f7,#f97316);
-  color:#fff;border-bottom-left-radius:6px;
-  box-shadow:0 5px 20px rgba(168,85,247,.4);
-}
-.time{font-size:11px;color:#888;margin-top:4px}
-.ai-input{display:flex;gap:8px;padding:12px;background:#1a1a2e;align-items:center;border-radius:20px 20px 0 0}
-.ai-input input{flex:1;background:#2a2a3e;border:none;padding:13px 16px;border-radius:25px;color:#fff;outline:none;font-size:14px}
-.plus{width:40px;height:40px;border-radius:50%;border:none;background:#a855f7;color:#fff;font-size:22px}
-.mic{width:40px;height:40px;border:none;background:none;font-size:22px}
-.send{background:#a855f7;border:none;width:42px;height:42px;border-radius:50%;color:#fff;font-size:18px}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#f0f2f5;padding-bottom:70px}
+header{position:sticky;top:0;background:#fff;display:flex;justify-content:space-between;align-items:center;padding:10px 12px;z-index:10;box-shadow:0 1px 5px #0001}
+.logo{font-size:26px;font-weight:900;color:#1877f2;letter-spacing:1px}
+.logo span{color:#8a2be2}
+.top-icons{display:flex;gap:14px;font-size:22px;align-items:center}
+.top-icons button{border:none;background:#eee;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:18px}
+.page{display:none;padding:10px;max-width:520px;margin:auto}
+.page.active{display:block}
+.card{background:#fff;border-radius:12px;padding:12px;margin-bottom:12px;box-shadow:0 1px 3px #0001}
+.stories{display:flex;gap:10px;overflow-x:auto;padding:6px 2px}
+.story{text-align:center;min-width:68px;cursor:pointer}
+.story img,.avatar{width:62px;height:62px;border-radius:50%;object-fit:cover;border:3px solid #1877f2}
+.story p{font-size:11px;margin-top:3px}
+.post-head{display:flex;align-items:center;gap:8px}
+.post-head img{width:42px;height:42px;border-radius:50%;object-fit:cover}
+.post-head b{font-size:14px}
+.post-head small{color:#777;display:block;font-size:11px}
+.post-img{width:100%;border-radius:10px;margin:10px 0;max-height:380px;object-fit:cover}
+.actions{display:flex;justify-content:space-between;padding-top:8px;border-top:1px solid #eee}
+.actions button{border:none;background:none;font-size:14px;cursor:pointer}
+.sponsored{font-size:11px;color:#888}
+.btn-blue{background:#1877f2;color:#fff;border:none;padding:10px;border-radius:8px;width:100%;font-weight:700;cursor:pointer}
+.btn-gray{background:#eee;border:none;padding:10px;border-radius:8px;width:100%;font-weight:700;cursor:pointer}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.market-item{background:#fff;border-radius:12px;overflow:hidden}
+.market-item img{width:100%;height:140px;object-fit:cover}
+.market-item div{padding:8px}
+.notif{display:flex;gap:10px;align-items:center;background:#fff;padding:10px;border-radius:12px;margin-bottom:8px;cursor:pointer}
+.notif img{width:48px;height:48px;border-radius:50%;object-fit:cover}
+.popup{background:#fff;border-radius:12px;padding:12px;margin:8px 0;box-shadow:0 2px 10px #0002}
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.menu-item{background:#fff;padding:14px;border-radius:12px;text-align:center;cursor:pointer;font-weight:700}
+.chat-list-item{display:flex;gap:10px;align-items:center;background:#fff;padding:10px;border-radius:12px;margin-bottom:8px;cursor:pointer}
+.chat-list-item img{width:50px;height:50px;border-radius:50%;object-fit:cover}
+.msg-left{background:#eee;padding:8px 12px;border-radius:16px;max-width:75%;margin:6px 0}
+.msg-right{background:#1877f2;color:#fff;padding:8px 12px;border-radius:16px;max-width:75%;margin:6px 0 6px auto}
+.chat-input{display:flex;gap:6px;align-items:center;position:fixed;bottom:62px;left:0;right:0;max-width:520px;margin:auto;background:#fff;padding:8px}
+.chat-input input{flex:1;padding:10px;border-radius:20px;border:1px solid #ddd}
+.fab{position:fixed;right:14px;bottom:130px;width:52px;height:52px;border-radius:50%;background:#1877f2;color:#fff;border:none;font-size:24px;z-index:20;box-shadow:0 3px 10px #0003}
+.fab-ai{position:fixed;right:16px;bottom:192px;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#1877f2,#a855f7,#ec4899);color:#fff;border:none;font-size:22px;z-index:20;box-shadow:0 3px 10px #0003}
+nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:8px 0;border-top:1px solid #ddd;z-index:30}
+nav button{border:none;background:none;font-size:22px;cursor:pointer}
+nav button.active{color:#1877f2}
+nav small{display:block;font-size:10px}
+.cover{width:100%;height:150px;object-fit:cover;border-radius:12px}
+.profile-pic{width:110px;height:110px;border-radius:50%;object-fit:cover;border:4px solid #fff;margin-top:-55px}
+.tabs{display:flex;gap:8px;margin:10px 0}
+.tabs button{flex:1;padding:8px;border:none;border-radius:8px;background:#eee;cursor:pointer;font-weight:700}
+.tabs button.active{background:#1877f2;color:#fff}
+input,textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:10px;margin:6px 0}
+.ai-bubble{background:#f3e8ff;padding:10px;border-radius:14px;margin:8px 0}
 </style>
 </head>
 <body>
 
 <header>
-  <div style="display:flex;align-items:center;gap:8px"><div class="logo">LU<span>ZAM</span></div><div class="flower">🌸</div></div>
-  <div class="top-icons"><span>🔍</span><span>🔔</span><span>☰</span></div>
+  <div class="logo" onclick="show('home')">LUZAM<span>.</span></div>
+  <div class="top-icons">
+    <button onclick="show('home')">🔍</button>
+    <button onclick="show('menu')">⋮</button>
+  </div>
 </header>
 
-<div class="profile">
-  <div style="display:flex;gap:12px;align-items:center"><div class="avatar">U</div><div><h2 style="font-size:20px">Ushindi Kitungano Michel</h2><p style="color:#aaa;font-size:13px">667 followers • 358 suivi(e)s</p></div></div>
-  <p style="margin:12px 0;font-size:14px;line-height:1.5">What matters is moving forward CDUS<br>✦ Fondateur de LUZAM • 💼 Création digitale • 📍 Bukavu • 🎓 Université Catholique de Bukavu</p>
-  <div class="btn-row"><button class="btn violet">📊 Tableau de bord</button><button class="btn gray">✏️ Modifier</button></div>
+<!-- N°1 ACCUEIL -->
+<div id="home" class="page active">
+  <div class="card" style="display:flex;gap:8px;align-items:center" onclick="show('profile')">
+    <img src="https://i.pravatar.cc/100?img=12" class="avatar" style="width:42px;height:42px;border:none">
+    <input placeholder="Quoi de neuf, Ushindi ?" readonly>
+  </div>
+  <div class="stories">
+    <div class="story" onclick="show('profile')"><img src="https://i.pravatar.cc/100?img=12"><p>Ma story</p></div>
+    <div class="story"><img src="https://i.pravatar.cc/100?img=32"><p>Travis</p></div>
+    <div class="story"><img src="https://i.pravatar.cc/100?img=47"><p>Sarah</p></div>
+    <div class="story"><img src="https://i.pravatar.cc/100?img=5"><p>David</p></div>
+    <div class="story"><img src="https://i.pravatar.cc/100?img=68"><p>Amina</p></div>
+  </div>
+
+  <div class="card">
+    <div class="post-head"><img src="https://i.pravatar.cc/100?img=32"><div><b>Travis Emeri</b><small>2h · Bukavu</small></div></div>
+    <p style="margin-top:8px">What matters is moving forward 🇨🇩🇺🇸 #MoveForward</p>
+    <img src="https://picsum.photos/500/320?1" class="post-img">
+    <div class="actions"><button onclick="this.innerText='❤️ Aimé'">👍 J'aime</button><button onclick="show('comments')">💬 Commenter</button><button>↗️ Partager</button></div>
+  </div>
+
+  <div class="card">
+    <p class="sponsored">Sponsorisée · Complément Alimentaire</p>
+    <div class="post-head"><img src="https://picsum.photos/100/100?2"><div><b>Complément Alimentaire</b><small>Sponsorisée</small></div></div>
+    <img src="https://picsum.photos/500/300?3" class="post-img">
+    <button class="btn-blue">Acheter</button>
+  </div>
+
+  <div class="card">
+    <div class="post-head"><img src="https://i.pravatar.cc/100?img=47"><div><b>Sarah M.</b><small>5h</small></div></div>
+    <p style="margin-top:8px">Belle journée à Bukavu ❤️</p>
+    <img src="https://picsum.photos/500/320?4" class="post-img">
+    <div class="actions"><button>👍 J'aime</button><button>💬 Commenter</button><button>↗️ Partager</button></div>
+  </div>
+
+  <div class="card">
+    <p class="sponsored">Sponsorisée · ElevenLabs</p>
+    <b>ElevenLabs - La plateforme créative IA tout-en-un</b>
+    <p style="font-size:13px;color:#555;margin:6px 0">Crée voix, musique, doublage... Voir plus</p>
+    <img src="https://picsum.photos/500/280?5" class="post-img">
+  </div>
 </div>
 
-<div class="menu">
-  <div class="menu-item" onclick="openAI()">✦ <b>LUZAM AI - Intelligent</b></div>
-  <div class="menu-item">🎁 Anniversaires</div><div class="menu-item">💙 Assistance</div><div class="menu-item">💳 Commandes et paiements</div><div class="menu-item">📢 Espace Pubs</div><div class="menu-item">📅 Évènements</div><div class="menu-item">💬 Messenger</div><div class="menu-item">🚩 Pages</div><div class="menu-item">🎮 Vidéos de gaming</div>
+<!-- MENU / PARAMETRE - 3 POINTS -->
+<div id="menu" class="page">
+  <div class="card" onclick="show('profile')" style="display:flex;gap:10px;align-items:center">
+    <img src="https://i.pravatar.cc/100?img=12" class="avatar" style="border:none"><div><b>Ushindi Kitungano Michel</b><br><small>Voir votre profil</small></div>
+  </div>
+  <button class="btn-blue" style="margin-bottom:10px">➕ Inviter des ami(e)s</button>
+  <div class="menu-grid">
+    <div class="menu-item" onclick="show('profile')">📊 Tableau de bord</div>
+    <div class="menu-item" onclick="show('messages')">💬 Messages</div>
+    <div class="menu-item">👥 Groupes</div>
+    <div class="menu-item">🧑‍🤝‍🧑 Ami(e)s</div>
+    <div class="menu-item">🎬 Reels</div>
+    <div class="menu-item" onclick="show('market')">🛍️ Market</div>
+    <div class="menu-item">📄 Pages</div>
+    <div class="menu-item">🔖 Enregistrements</div>
+    <div class="menu-item">🕰️ Souvenirs</div>
+    <div class="menu-item">🎂 Anniversaires</div>
+    <div class="menu-item">📅 Évènements</div>
+    <div class="menu-item">⚙️ Paramètres des données</div>
+    <div class="menu-item">🧵 Fils</div>
+    <div class="menu-item">📸 Instagram Lite</div>
+  </div>
+  <div class="card"><b>⚙️ Paramètres et confidentialité ∨</b><p style="font-size:13px;margin-top:6px">Compte, Confidentialité, Notifications, Langue</p></div>
+  <div class="card"><b>❓ Aide et assistance ∨</b><p style="font-size:13px;margin-top:6px">Centre d'aide, Signaler un problème</p></div>
+  <div class="card">👤 Ajouter un compte</div>
+  <div class="card" style="color:red"><b>🚪 Déconnexion</b></div>
 </div>
 
-<div class="create"><div class="avatar" style="width:42px;height:42px;font-size:16px">U</div><input id="newPost" placeholder="Quoi de neuf, Ushindi ?"><button class="btn violet" onclick="publish()" style="flex:none;padding:10px 18px">Publier</button></div>
-<div id="feed"></div>
-
-<nav><button>🏠</button><button onclick="openAI()">✦</button><button>🎬</button><button>💬</button><button>👤</button></nav>
-
-<!-- CHAT COMME DANS L'IMAGE -->
-<div id="aiChat">
-  <div class="ai-head">
-    <button onclick="closeAI()" style="background:none;border:none;color:#fff;font-size:22px">←</button>
-    <div style="font-size:38px">🌸</div>
-    <div><h3>LUZAM AI</h3><small>● Assistant IA • En ligne</small></div>
-  </div>
-  <div id="msgs">
-    <div class="msg ai">Bonjour Ushindi ! 👋<br>Je suis LUZAM AI, ton assistant.<br>Comment puis-je t'aider aujourd'hui ? Je peux t'aider à créer un post, planifier ton contenu, trouver des idées, ou organiser ta journée.</div>
-    <div class="time">09:42</div>
-  </div>
-  <div class="ai-input">
-    <button class="plus">+</button>
-    <input id="txt" placeholder="Écris un message à LUZAM AI..." onkeypress="if(event.key==='Enter')sendMsg()">
-    <button class="mic" onclick="startVoice()">🎙️</button>
-    <span style="font-size:22px">🖼️</span><span style="font-size:20px">GIF</span><span style="font-size:22px">😊</span>
-    <button class="send" onclick="sendMsg()">➤</button>
+<!-- PROFIL -->
+<div id="profile" class="page">
+  <div class="card">
+    <img src="https://picsum.photos/600/200?10" class="cover">
+    <center><img src="https://i.pravatar.cc/200?img=12" class="profile-pic"></center>
+    <center><h2>Ushindi Kitungano Michel</h2><p style="color:#666;font-size:13px">667 followers · 358 suivi(e)s · 17 publications</p></center>
+    <p style="font-size:14px;margin:10px 0">What matters is moving forward 🇨🇩🇺🇸<br>Créateur avec IA · Création digitale · Bukavu<br>Université Catholique de Bukavu</p>
+    <div style="display:flex;gap:8px"><button class="btn-blue">📊 Tableau de bord</button><button class="btn-gray">➕ Ajouter à la story</button></div>
+    <div class="tabs"><button class="active">Tous</button><button>Reels</button><button>Photos</button></div>
+    <div class="grid2"><img src="https://picsum.photos/300/200?11" style="width:100%;border-radius:10px"><img src="https://picsum.photos/300/200?12" style="width:100%;border-radius:10px"></div>
+    <h3 style="margin-top:12px">Informations personnelles</h3>
+    <p style="font-size:13px">📍 Bukavu, Baraka<br>🎂 16 février 2008<br><u>Voir plus...</u></p>
+    <p style="font-size:13px;margin-top:8px"><b>Formation :</b> Université Catholique de Bukavu</p>
   </div>
 </div>
+
+<!-- NOTIFICATIONS N°5 -->
+<div id="notif" class="page">
+  <div style="display:flex;justify-content:space-between;align-items:center"><h2>← Notifications</h2><span>🔍</span></div>
+  <h3 style="margin:12px 0">Aujourd'hui</h3>
+  <div class="notif" onclick="document.getElementById('popupNotif').style.display='block'"><img src="https://i.pravatar.cc/100?img=32"><div><b>Travis et 22 autres</b> ont aimé votre photo.<br><small>3h</small></div></div>
+  <div class="notif"><img src="https://i.pravatar.cc/100?img=47"><div><b>Sarah</b> a commenté votre publication.<br><small>5h</small></div></div>
+  <div id="popupNotif" class="popup" style="display:none">
+    <b>Voulez-vous voir plus ou moins de notifications similaires ?</b><br><br>
+    <button class="btn-blue" onclick="this.parentElement.style.display='none'">Afficher plus</button><br><br>
+    <button class="btn-gray" onclick="this.parentElement.style.display='none'">Afficher moins</button>
+  </div>
+</div>
+
+<!-- MARKET N°6 -->
+<div id="market" class="page">
+  <div style="display:flex;justify-content:space-between"><h2>← Market</h2><span>🔍</span></div>
+  <div class="tabs"><button class="active">👤</button><button onclick="show('messages')">Messagerie</button><button>Vendre</button><button>Catégories</button></div>
+  <h3>Sélections du jour</h3><p style="font-size:13px">📍 Bukavu · 65 km</p>
+  <div class="grid2" style="margin-top:10px">
+    <div class="market-item"><img src="https://picsum.photos/300/200?20"><div><b>50 CDF</b><br>Hublot</div></div>
+    <div class="market-item"><img src="https://picsum.photos/300/200?21"><div><b>400 CDF</b><br>Samsung</div></div>
+    <div class="market-item"><img src="https://picsum.photos/300/200?22"><div><b>250 CDF</b><br>Xbox</div></div>
+    <div class="market-item"><img src="https://picsum.photos/300/200?23"><div><b>5 CDF</b><br>Pantalon</div></div>
+  </div>
+  <button class="btn-blue" style="margin-top:12px" onclick="alert('Publier une annonce - Photo, Prix CDF, Titre')">+ Vendre un article</button>
+</div>
+
+<!-- MESSAGES LISTE -->
+<div id="messages" class="page">
+  <h2>Messages</h2>
+  <input placeholder="🔍 Rechercher">
+  <div class="chat-list-item" onclick="show('chat')"><img src="https://i.pravatar.cc/100?img=32"><div><b>Travis Emeri</b><br><small>Salut frère !</small></div><small>Actif</small></div>
+  <div class="chat-list-item" onclick="show('chat')"><img src="https://i.pravatar.cc/100?img=47"><div><b>Sarah M.</b><br><small>Tu as vu ?</small></div></div>
+  <div class="chat-list-item" onclick="show('chat')"><img src="https://i.pravatar.cc/100?img=5"><div><b>David K.</b><br><small>Ok demain</small></div></div>
+  <p style="font-size:12px;color:#888;margin-top:10px">En bas à droite : + = Groupe / Nouveau message. Au-dessus : Meta AI ✨</p>
+</div>
+
+<!-- CHAT -->
+<div id="chat" class="page">
+  <div style="display:flex;align-items:center;gap:8px;background:#fff;padding:10px;border-radius:12px">
+    <span onclick="show('messages')">←</span><img src="https://i.pravatar.cc/100?img=32" style="width:40px;height:40px;border-radius:50%"><div><b>Travis Emeri</b><br><small>Actif</small></div><span style="margin-left:auto">📞 🎥 ⚙️</span>
+  </div>
+  <div id="chatBox" style="padding:10px 0">
+    <div class="msg-left">Salut frère, tu vas bien ?</div>
+    <div class="msg-right">Oui ça va et toi ?</div>
+    <div class="msg-left">On se voit demain à Bukavu ?</div>
+  </div>
+</div>
+
+<!-- LUZAM AI -->
+<div id="ai" class="page">
+  <center><div style="font-size:50px">🌸</div><h2>LUZAM AI</h2><p style="color:#666">Ton assistant intelligent</p></center>
+  <div class="ai-bubble"><b>LUZAM AI :</b> Bonjour Ushindi ! Je suis LUZAM AI, ton assistant. Je peux créer des légendes, des idées de post, planifier ta journée. Que veux-tu ?</div>
+  <div id="aiChat"></div>
+  <div style="display:flex;gap:6px;margin-top:10px">
+    <button onclick="askAI('légende')">Légende motivante</button>
+    <button onclick="askAI('idée')">Idée de post</button>
+    <button onclick="askAI('journée')">Planifier journée</button>
+  </div>
+  <div class="chat-input" style="position:static;margin-top:12px"><span>📷</span><span>GIF</span><input id="aiInput" placeholder="Parle à LUZAM AI..."><span>😀</span><button onclick="sendAI()">🎙️</button></div>
+</div>
+
+<!-- COMMENTAIRES -->
+<div id="comments" class="page">
+  <h2>Commentaires</h2>
+  <div class="card">❤️ Travis : Super photo frère !</div>
+  <div class="card">Sarah : J'adore 😍</div>
+  <input placeholder="Commenter en tant que Ushindi...">
+  <button class="btn-blue" onclick="show('home')">Publier</button>
+</div>
+
+<button class="fab-ai" onclick="show('ai')">✨</button>
+<button class="fab" onclick="alert('Nouveau message / Créer un groupe')">+</button>
+
+<nav>
+  <button onclick="show('home')" class="active">🏠<small>Accueil</small></button>
+  <button onclick="show('messages')">💬<small>Messages</small></button>
+  <button onclick="show('market')">🛍️<small>Market</small></button>
+  <button onclick="show('notif')">🔔<small>Notif</small></button>
+  <button onclick="show('menu')">☰<small>Menu</small></button>
+</nav>
 
 <script>
-function openAI(){document.getElementById('aiChat').classList.add('open')}
-function closeAI(){document.getElementById('aiChat').classList.remove('open')}
-async function loadPosts(){
-  const r=await fetch('/api/posts'); const posts=await r.json();
-  document.getElementById('feed').innerHTML=posts.map(p=>`<div class="post"><b>${p.user}</b><p style="margin:10px 0">${p.text}</p><div class="post-img">🚀 LUZAM</div><div class="actions"><button>❤️ J'aime (${p.likes})</button><button>💬 Commenter</button><button>↗️ Partager</button></div></div>`).join('');
+function show(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+  document.querySelector('.fab').style.display = id==='chat' ? 'none' : 'block';
+  document.querySelector('.fab-ai').style.display = id==='chat' ? 'none' : 'block';
+  if(id==='chat'){
+    if(!document.getElementById('chatInputBar')){
+      let d=document.createElement('div'); d.id='chatInputBar'; d.className='chat-input';
+      d.innerHTML='<span>📷</span><span>🎤</span><input id="msgInput" placeholder="Message..."><span>😀</span><button onclick="sendMsg()">👍</button>';
+      document.body.appendChild(d);
+    }
+    document.getElementById('chatInputBar').style.display='flex';
+  } else {
+    let b=document.getElementById('chatInputBar'); if(b) b.style.display='none';
+  }
 }
-async function publish(){
-  const v=document.getElementById('newPost').value.trim(); if(!v) return;
-  await fetch('/api/posts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:v})});
-  document.getElementById('newPost').value=''; loadPosts();
+function sendMsg(){
+  let v=document.getElementById('msgInput').value; if(!v) return;
+  let d=document.createElement('div'); d.className='msg-right'; d.innerText=v;
+  document.getElementById('chatBox').appendChild(d);
+  document.getElementById('msgInput').value='';
+  setTimeout(()=>{ let r=document.createElement('div'); r.className='msg-left'; r.innerText='Ok compris frère !'; document.getElementById('chatBox').appendChild(r); },800);
 }
-async function sendMsg(){
-  let input=document.getElementById('txt'); let text=input.value.trim(); if(!text) return;
-  let msgs=document.getElementById('msgs'); msgs.innerHTML+=`<div class="msg me">${text}</div><div class="time" style="align-self:flex-end">09:42 ✓✓</div>`; input.value='';
-  const r=await fetch('/api/ai',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text})});
-  const d=await r.json(); msgs.innerHTML+=`<div class="msg ai">${d.reply.replace(/\n/g,'<br>')}</div><div class="time">09:43 ✓✓</div>`; msgs.scrollTop=msgs.scrollHeight;
+function askAI(type){
+  let box=document.getElementById('aiChat');
+  let txt='';
+  if(type==='légende') txt='Voici 3 légendes : 1) Ne lâche jamais. #MoveForward 2) Chaque jour est une chance. #Mindset 3) Bukavu, on avance ensemble 🇨🇩';
+  if(type==='idée') txt='Idée de post : Photo de toi + texte "Ce que j\'ai appris cette semaine..." + Reels 15s';
+  if(type==='journée') txt='Plan : 7h Sport, 9h Études, 13h Création LUZAM, 18h Post + Story';
+  box.innerHTML+='<div class="ai-bubble"><b>LUZAM AI :</b> '+txt+'</div>';
 }
-function startVoice(){
-  if('webkitSpeechRecognition' in window){
-    let rec=new webkitSpeechRecognition(); rec.lang='fr-FR';
-    rec.onresult=(e)=>{document.getElementById('txt').value=e.results[0][0].transcript; sendMsg();}
-    rec.start();
-  } else alert('Micro : sur téléphone ça marchera');
+function sendAI(){
+  let v=document.getElementById('aiInput').value; if(!v) v='aide-moi à rédiger une légende motivante';
+  document.getElementById('aiChat').innerHTML+='<div class="msg-right">'+v+'</div>';
+  setTimeout(()=>askAI('légende'),600);
+  document.getElementById('aiInput').value='';
 }
-loadPosts();
 </script>
 </body>
 </html>
